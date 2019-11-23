@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script type="text/javascript" src="js/validacion.js"></script>
-        <link rel="stylesheet" href="css/stylesF.css">
+        <link rel="stylesheet" href="css/stylesF1.css">
         <link rel="icon" type="image/png"  href="img/icono.png">
         <title>Formulario</title>
 </head>
@@ -15,61 +15,44 @@
 <body>
         
 
-        <form id="formulario01" action="../controladores/crear_usuario.php" method="POST"
-                onsubmit="return validarCamposObligatorios()" >
+        <form id="formulario01" action="../../controladores/usuario/crear_evento.php" method="POST" >
+                <h1>CREAR REUNIONES</h1>
                 <br>
                 <br>
-                <label for="cedula">Cedula :</label>
-                <input type="text" id="cedula" name="cedula" value="" maxlength="10" 
-                        placeholder="&#127380;Ingrese el número de cedula ..."
-                        onkeypress="ValidarNumeros(event,'mensajeCedula',this)" />
-                <br>
-                <span size=4 id="mensajeCedula"></span>
+                <label for="asunto">Asunto :</label>
+                <input type="text" id="asunto" name="asunto" value="" placeholder="Ingrese el asunto de la reunion" />
                 <br>
                 <br>
-                <label for="nombres">Nombres :</label>
-                <input type="text" id="nombres" name="nombres" value="" placeholder="&#128100;Ingrese sus dos nombres
-..." onkeypress="ValidarLetras(event,'mensajeNombres',this)" />
-                <br>
-                <span id="mensajeNombres"></span>
+                <label for="fecha">Fecha :</label>
+                <input type="date" id="fecha" name="fecha" value="" placeholder="Ingrese la fecha del evento" />
                 <br>
                 <br>
-                <label for="apellidos">Apellidos :</label>
-                <input type="text" id="apellidos" name="apellidos" value="" placeholder="&#128100;Ingrese sus dos apellidos
-..." onkeypress="ValidarLetras(event,'mensajeApellidos',this)" />
-                <br>
-                <span id="mensajeApellidos"></span>
+                <label for="hora">Hora :</label>
+                <input type="time" id="hora" name="hora" value="" placeholder="Ingrese la hora del evento"  />
+                
                 <br>
                 <br>
-                <label for="direccion">Dirección :</label>
-                <input type="text" id="direccion" name="direccion" value="" placeholder="&#x1F3C3;&#x200D;&#x2642;&#xFE0F;Ingrese su dirección ..." />
-                <br>
-                <span id="mensajeDireccion"></span>
+                <label for="lugar">Lugar :</label>
+                <input type="text" id="lugar" name="lugar" value="" placeholder="Ingrese el lugar de recepcion" />
                 <br>
                 <br>
-                <label for="telefono">Teléfono :</label>
-                <input type="text" id="telefono" name="telefono" value="" placeholder="&#128222;Ingrese su número telefónico
-..." onkeypress="ValidarTelefono(event,'mensajeTelefono',this)" />
-                <br>
-                <span id="mensajeTelefono"></span>
+                <label for="cordenadas">Cordenadas :</label>
+                <input type="text" id="cordenadas" name="cordenadas" value="" placeholder="Ingrese las coordenadas "/>
+                
                 <br>
                 <br>
-                <label for="fecha">Fecha Nacimiento :</label>
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="" placeholder="&#128118;Ingrese su fecha de nacimiento ..." onkeypress="validarFecha(event, 'mensajeFecha',this)" />
-                <br>
-                <span id="mensajeFecha"></span>
-                <br>
-                <br>
-                <label for="correo">Correo electrónico :</label>
-                <input type="email" id="correo" name="correo" value="" placeholder="&#9993;Ingrese su correo electrónico
-..." onkeypress="ValidarCorreo(event,'mensajeCorreo',this)" />
-                <br>
-                <span id="mensajeCorreo"></span>
+                <label for="remitente">Remitente :</label>
+                <input type="text" id="remitente" name="remitente" value="" placeholder="Ingrese su nombre" />
+
                 <br>
                 <br>
-                <label for="contrasenia">Contraseña :</label>
-                <input type="password" id="contrasenia" name="contrasena" value="" placeholder="&#128272;Ingrese su contrasenia
-..." onkeypress="ValidarContra(event,'mensajeContra',this)" />
+                <label for="motivos">Motivos :</label>
+                <input type="text" id="motivos" name="motivos" value="" placeholder="Ingrese el motivo de la creacion del evento" />
+               
+                <br>
+                <br>
+                <label for="observaciones">Observaciones :</label>
+                <input type="text" id="observaciones" name="observaciones" value="" placeholder="Ingrese las observaciones" />
                 <br>
                 <span id="mensajeContra"></span>
                 <br>
