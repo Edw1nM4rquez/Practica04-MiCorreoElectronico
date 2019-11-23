@@ -1,0 +1,234 @@
+
+/*damos el tipo de letra y el tamaño de las misma */
+.titulopri{
+    font-size: 2.3em;
+	line-height: 1.3em;
+	margin: 30px 0;
+	text-align: center;
+	font-weight: 300;
+    background: #333;
+    color: white;
+
+    }
+    #logo {
+        max-width: 100%;
+        width: 98.5%;
+        
+        border: rgb(250, 250, 250) 8px inset;
+        border-radius: 8px;
+
+    }
+   
+    /*definimos en ancho y el alto de la imagen del logo y de las demas que se agregaran al texto */
+
+    
+/* creamos un margen en el cuerpo de la pagina */
+/*
+body {
+	width: 88.2%;
+	max-width: 1500px;
+	padding-left: 0.9%;
+	padding-right: 0.9%;
+	margin: 0px auto auto auto;
+	clear: none;
+	float: none;
+	background-color: ivory;
+}*/
+
+/* agregamos un color al fondo */
+html{
+    background-image: url("../img/fondo1.jpg");
+    background-size: 100%;
+}
+
+     /*imagen de fondo en el cuerpo de pagina */
+/*body{
+    background-image: url("../img/fondo.jpg");
+  }
+*/
+/*--------------------------------------------*/
+
+
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+}	
+	#main-header a {
+		color: white;
+	}
+ 
+/*
+ * Logo
+ */
+#logo-header {
+	float: left;
+	padding: 15px 0 0 20px;
+	text-decoration: none;
+}
+	#logo-header:hover {
+		color: #0b76a6;
+	}
+	
+	#logo-header .site-name {
+		display: block;
+		font-weight: 500;
+		font-size: 1.2em;
+	}
+	
+	#logo-header .site-desc {
+		display: block;
+		font-weight: 500;
+		font-size: 0.8em;
+		color: #999;
+	}
+	
+ 
+/*
+ * Navegación
+ */
+nav {
+	float: right;
+}
+	nav ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-right: 20px;
+	}
+	
+		nav ul li {
+			display: inline-block;
+			line-height: 80px;
+		}
+			
+			nav ul li a {
+				display: block;
+				padding: 0 10px;
+				text-decoration: none;
+			}
+			
+				nav ul li a:hover {
+					background: #0b76a6;
+                }
+                /*Con estos estilos aplicaremos diseño al contenido:*/
+                #main-content {
+                    background-image: url("../img/fondo2.jpg");
+                    width: 100%;
+                    background-size: 100%;
+                    max-width: 1000px;
+                    margin: 20px auto;
+                    box-shadow: 0 0 10px rgba(0,0,0,.1);
+                }
+                 
+                    #main-content header,
+                    #main-content .content {
+                        padding: 40px;
+                    }
+
+                  
+    
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+	
+	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	top: 0; /* Posicionamos la cabecera pegada arriba */
+	position: fixed; /* Hacemos que la cabecera tenga una posición fija */
+}
+
+/*necesitamso espacios lo unico que se me ocurrio para hacerlo rapido*/
+
+#iconomenu{
+    width: 10%;
+    height: 20%;
+}
+
+/*Cuadros de los eventos*/
+article div {
+	border-bottom: 1px solid rgb(151, 151, 151);
+}
+
+article div:first-of-type {
+	margin-top: 30px;
+}
+
+article div h1 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+article p, article address {font-family: "Times New Roman", Times, serif;}
+
+
+
+article div {    
+	width: 30.3%;
+	margin: 0% 1% 2% 1%;
+    border: 3px solid rgb(255, 255, 255);
+  
+}
+
+article div h1 {
+	text-align: center;
+	font-weight: normal;
+	font-size: 1em;
+	border-bottom: 1px solid rgb(151, 151, 151);
+	background-color: #ffffff;
+}
+
+article div p {
+	font-size: 0.85em;
+    text-align: left;
+    background-image: url('../img/fondo3.jpg');
+}
+
+#princ{
+    padding-left: 30%;
+    padding-right: 0.9%;
+}
+
+
+/*-------------------------------*/
+/*  los pie de páginaCSS*/
+
+
+#main-footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 40px;
+}
+	#main-footer p {
+		margin: 0;
+	}
+	
+	#main-footer a {
+		color: white;
+	}
+
+#main-footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 40px;
+}
+	#main-footer p {
+		margin: 0;
+	}
+	
+	#main-footer a {
+		color: white;
+    }
+    
+    article div h1 {
+        font-size: 1.1em;
+    }
+    
+    article div p {
+        font-size: 0.95em;
+    }
