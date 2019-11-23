@@ -11,7 +11,7 @@ MD5('$contrasena')";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
  $_SESSION['isLogged'] = TRUE;
- header("Location: ../vista/index.php");
+ header("Location: ../../admin/vista/usuario/cuenta.php");
  } else {
  header("Location: ../vista/iniciar.html");
  }

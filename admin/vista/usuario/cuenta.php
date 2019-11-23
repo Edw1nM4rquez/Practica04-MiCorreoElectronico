@@ -29,7 +29,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
             <nav>
               <ul>
                 <li><a href="#"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../../public/vista/login.html" id="">Volver</a></li>
+                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="crear_reuniones.html" id="">Crear Evento</a></li>
               </ul>
             </nav>
