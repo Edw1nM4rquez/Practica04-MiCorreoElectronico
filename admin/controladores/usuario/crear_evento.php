@@ -13,7 +13,8 @@
  <?php
  
  //incluir conexión a la base de datos
- include '../../config/conexionBDevento.php';
+ include '../../../config/conexionBD.php';
+
  $asunto = isset($_POST["asunto"]) ? trim($_POST["asunto"]): null;
  $fecha = isset($_POST["fecha"]) ? trim($_POST["fecha"]): null;
 
@@ -25,7 +26,7 @@
  $motivos = isset($_POST["motivos"]) ? trim($_POST["motivos"]): null;
  $observaciones = isset($_POST["observaciones"]) ? trim($_POST["observaciones"]) : null;
 
- $sql = "INSERT INTO usuario VALUES (0, '$fecha', '$asunto', '$hora', '$lugar', '$coordenadas',
+ $sql = "INSERT INTO reunion VALUES (0, '$fecha', '$asunto', '$hora', '$lugar', '$coordenadas',
 '$remitente',  '$motivos', '$observaciones', null)";
 
  if ($conn->query($sql) === TRUE) {
