@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
     header("Location: /Practica04/public/vista/login.html");
 }
-
+/*Creadi por Edwin Maruez*/ 
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
             <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
            Pruebas de nuevos estilos -->
             <a id="logo-header" href="#">
-                    <span class="site-name">Edwin Marquez</span>
+                    <span class="site-name">User </span>
                     <span class="site-desc">Universidad Politecnica Salesiana</span>
                 </a> <!-- / #logo-header -->
 
