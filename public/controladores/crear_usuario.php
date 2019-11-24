@@ -24,9 +24,10 @@
  $contrasena = isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
 
  $sql = "INSERT INTO usuario VALUES (0, '$cedula', '$nombres', '$apellidos', '$direccion', '$telefono',
-'$correo', MD5('$contrasena'), '$fechaNacimiento', 'N', null, null)";
+'$correo', MD5('$contrasena'), '$fechaNacimiento', 'N', null, null,'user')";
  if ($conn->query($sql) === TRUE) {
- echo "<p>Se ha creado los datos personales correctamemte!!!</p>";
+    header("Location: ../../admin/vista/usuario/cuenta.php");
+
  } else {
  if($conn->errno == 1062){
  echo "<p class='error'>La persona con la cedula $cedula ya esta registrada en el sistema </p>";
@@ -37,7 +38,7 @@
 
  //cerrar la base de datos
  $conn->close();
- echo "<a href='../vista/crear_usuario.html'>Regresar</a>";
+ 
 
  ?>
 </body>
