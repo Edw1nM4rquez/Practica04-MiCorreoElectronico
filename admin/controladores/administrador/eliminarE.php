@@ -21,7 +21,7 @@ re_codigo = $codigo";
  } else {
  echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
  }
- echo "<a href='../../vista/administrador/eliminarE.php'>Regresar</a>";
+ echo "<a href='../../vista/administrador/adminW.php'>Regresar</a>";
  $conn->close();
 
 ?>

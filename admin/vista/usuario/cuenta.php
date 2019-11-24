@@ -93,6 +93,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                 <th>Motivos</th>
                 <th>Observaciones</th>
                 <th>Fecha Creacion</th>
+                <th>Estado Reunion</th>
                 
             </tr>
             <?php
@@ -120,6 +121,8 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                                 echo " <td>" . $row['re_motivo'] . "</td>";
                                 echo " <td>" . $row['re_observacion'] . "</td>";
                                 echo " <td>" . $row['re_fecha_creacion'] . "</td>";
+                                echo " <td>" . $row['re_eliminada'] . "</td>";
+                                
                                 echo "</tr>";
                                 
                             }
@@ -145,7 +148,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
             </tr>
             <?php
                     include '../../../config/conexionBD.php';
-                    $sql = "SELECT * FROM registro ; " ;
+                    $sql = "SELECT * FROM reunion where re_eliminada= 'N' ; " ;
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
