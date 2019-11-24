@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script type="text/javascript" src="js/validacion.js"></script>
-        <link rel="stylesheet" href="css/stylesF.css">
+        <link rel="stylesheet" href="../../../public/vista/css/stylesF.css">
         <title>Formulario</title>
 </head>
 
@@ -14,16 +14,12 @@
 <body>
         
 
-        <form id="formulario01" action="../controladores/login.php" method="POST"
+        <form id="formulario01" action="Misdatos.php" method="POST"
                 onsubmit="return validarCamposObligatorios()" >
             
                 <br>
                 <br>
-                <label for="correo">Correo electrónico :</label>
-                <input type="email" id="correo" name="correo" value="" placeholder="&#9993;Ingrese su correo electrónico
-..." onkeypress="ValidarCorreo(event,'mensajeCorreo',this)" />
-                <br>
-                <span id="mensajeCorreo"></span>
+                <label for="correo">Ingrese su contraseña otras vez por seguridad :</label>
                 <br>
                 <br>
                 <label for="contrasenia">Contraseña :</label>

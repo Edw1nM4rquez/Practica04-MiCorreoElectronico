@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
     header("Location: /Practica04/public/vista/login.html");
 }
-/*Creadi por Edwin Maruez*/ 
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                 <li><a href="cuenta.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="crear_reuniones.php" id="">Crear Evento</a></li>
-                <li><a href=" " id="">Mis datos</a></li>
+                <li><a href="seguridad.php" id="">Mis datos</a></li>
                 <li><a href="" id="">Cambiar contraseña</a></li>
               </ul>
             </nav>
@@ -53,7 +53,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                 <input type="text" id="nombres" name="nombres" value="" placeholder="Ingrese sus nombres y apellidos" />
                 <br>
 <br>
-                <input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
+                <!--<input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
                          border: 0;
                             color: brown;
@@ -62,7 +62,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                                     border-radius: 25px;
                                      height: 40px;
                                      width:10%;
-                                         text-align: center;" />
+                                         text-align: center;" />-->
 
                 <input type="submit" class="ingresar" id="crear" name="crear" value="Aceptar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
