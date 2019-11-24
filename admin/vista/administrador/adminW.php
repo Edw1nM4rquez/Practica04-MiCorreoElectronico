@@ -7,9 +7,29 @@
 </head>
 <body>
 
+<header id="main-header">
+            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
+           Pruebas de nuevos estilos -->
+            <a id="logo-header" href="#">
+                    <span class="site-name">Administrador</span>
+                    <span class="site-desc">Universidad Politecnica Salesiana</span>
+                </a> <!-- / #logo-header -->
 
-
-
+            <nav>
+              <ul>
+                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
+                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
+                <li><a href="" id="">Ver Eventos</a></li>
+                <li><a href=" " id="">Mis datos</a></li>
+              </ul>
+            </nav>
+        </header>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
  <table style="width:100%">
  <tr>
@@ -55,4 +75,22 @@ contraseña</a> </td>";
  }
  $conn->close();
  ?>
- </table> 
+ </table>
+ 
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+
+ <footer id="main-footer">
+                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana &#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
+                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
+                &#169; Todos los derechos reservados
+            </footer>
+
+</body>
+</html>

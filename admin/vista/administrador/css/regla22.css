@@ -3,6 +3,21 @@
     margin: 0;
     padding: 0;
 }
+
+
+.regresar{
+    background: linear-gradient(#FFDA63, #FFB940);
+    border: 0;
+    color: brown;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 20px;
+    height: 38px;
+    text-align: center;
+}
+
+
+
 body {
 
     /* background-repeat: no-repeat; */
