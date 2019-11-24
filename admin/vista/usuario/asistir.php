@@ -1,11 +1,3 @@
-<?php
-session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +21,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 
             <nav>
               <ul>
-                <li><a href="#"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
+                <li><a href="cuenta.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="crear_reuniones.html" id="">Crear Evento</a></li>
               </ul>
@@ -38,14 +30,12 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
         <br>
         <br>
         <br>
-       <br>
-
-        
-        <form id="formulario01" action="asistir.php" method="POST" >
         <br>
-        <label for="regis">Ingrese el codigo del evento que deceas asistir :</label>
-                <input type="text" id="regis" name="regis" value="" placeholder="Ingrese el codigo" />
-        
+        <form id="formulario01" action="../../controladores/usuario/reAsistir.php" method="POST" >
+        <br>
+        <label for="regis">Ingrese sus nombre :</label>
+                <input type="text" id="regis" name="regis" value="" placeholder="Ingrese su cedula" />
+        </form>
                 <br>
                 <input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
@@ -68,52 +58,35 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                                      height: 40px;
                                      width:10%;
                                          text-align: center;" />
-             </form>
-             <br>
+                <br>
                 <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <table style="width:100% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
+        <table style="width:50% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
             <tr>
                 <th>Codigo</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Lugar</th>
-                <th>Cordenadas</th>
-                <th>Remitente</th>
-                <th>Motivos</th>
-                <th>Observaciones</th>
-                <th>Fecha Creacion</th>
+                <th>Asistentes</th>
+                
                 
             </tr>
             <?php
+                    
+
                     include '../../../config/conexionBD.php';
-                    $sql = "SELECT * FROM reunion ; " ;
+                    $codigo = isset($_POST["regis"]) ? trim($_POST["regis"]): null;
+
+                    $sql = "SELECT * FROM registro; " ;
                     $result = $conn->query($sql);
-
-
-
-
 
                     if ($result->num_rows > 0) {
 
-                            $sql = "SELECT * FROM reunion; " ;
+                            $sql = "SELECT * FROM registro  where re_usu_re_codigo = '$codigo'  ; " ;
                             $result = $conn->query($sql);
+                            
                             while($row = $result->fetch_assoc()) {
                                 echo "<tr>";
-                                echo " <td>" . $row["re_codigo"] . "</td>";
-                                echo " <td>" . $row["re_fecha_re"] . "</td>";
-                                echo " <td>" . $row['re_tema'] ."</td>";
-                                echo " <td>" . $row['re_hora'] . "</td>";
-                                echo " <td>" . $row['re_lugar'] . "</td>";
-                                echo " <td>" . $row['re_coordenada'] . "</td>";
-                                echo " <td>" . $row['re_remitente'] . "</td>";
-                                echo " <td>" . $row['re_motivo'] . "</td>";
-                                echo " <td>" . $row['re_observacion'] . "</td>";
-                                echo " <td>" . $row['re_fecha_creacion'] . "</td>";
+                                echo " <td>" . $row["re_usu_codigo"] . "</td>";
+                                echo " <td>" . $row["re_usu_asistente"] . "</td>";
+                            
                                 echo "</tr>";
                                 
                             }

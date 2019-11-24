@@ -30,7 +30,7 @@
 '$remitente',  '$motivos', '$observaciones', null)";
 
  if ($conn->query($sql) === TRUE) {
- echo "<p>Se ha creado un nuevo evento!!!</p>";
+    header("Location: ../../vista/usuario/cuenta.php");
  } else {
  
  echo "<p class='error'>Error: " . mysqli_error($conn) . "</p>";
@@ -39,7 +39,7 @@
 
  //cerrar la base de datos
  $conn->close();
- echo "<a href='../../vista/usuario/crear_reuniones.html'>Regresar</a>";
+ 
 
  ?>
 </body>
