@@ -1,5 +1,6 @@
 function buscarPormotivo() {
     var cedula = document.getElementById("cedula").value;
+
     if (cedula == "") {
     document.getElementById("informacion").innerHTML = "";
     } else {
@@ -10,14 +11,17 @@ function buscarPormotivo() {
     // code for IE6, IE5
     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
+
     xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-    //alert("llegue");
-    document.getElementById("informacion").innerHTML = this.responseText;
+        if (this.readyState == 4 && this.status == 200) {
+    alert("llegue");
+        document.getElementById("informacion").innerHTML = this.responseText;
     }
     };
+
     xmlhttp.open("GET","php/buscar.php?cedula="+cedula,true);
     xmlhttp.send();
     }
-    
+
     return false;
+}

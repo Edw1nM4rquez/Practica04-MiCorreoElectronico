@@ -12,6 +12,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/regla2.css">
+    <script type="text/javascript" src="js/ajax.js"></script>
     <title>Cuenta</title>
 </head>
 
@@ -42,7 +43,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
         <br>
        <br>
 
-        
+       
         <form id="formulario01" action="../../controladores/usuario/reAsistir.php" method="POST" >
         <br>
         <label for="regis">Ingrese el codigo del evento que deceas asistir :</label>
@@ -53,7 +54,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                 <input type="text" id="nombres" name="nombres" value="" placeholder="Ingrese sus nombres y apellidos" />
                 <br>
 <br>
-                <!--<input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
+                <!-- <input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
                          border: 0;
                             color: brown;
@@ -62,7 +63,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                                     border-radius: 25px;
                                      height: 40px;
                                      width:10%;
-                                         text-align: center;" />-->
+                                         text-align: center;" /> -->
 
                 <input type="submit" class="ingresar" id="crear" name="crear" value="Aceptar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
@@ -74,10 +75,19 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                                      height: 40px;
                                      width:10%;
                                          text-align: center;" />
-             </form>
+             </form> 
              <br>
                 <br>
         <br>
+        
+        <label for="nombres">Buscar Evento:</label>
+        <form  onsubmit="return buscarPormotivo()">
+                <input type="text" id="cedula" name="cedula" value="">
+                <input type="button" id="buscar" name="buscar" value="Buscar" onclick="buscarPormotivo()">
+        </form>
+        <br>
+        <div id="informacion"><b>Eventos</b>
+
         <br>
         <br>
         <br>
