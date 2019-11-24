@@ -19,7 +19,7 @@
               <ul>
                 <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
-                <li><a href="" id="">Ver Eventos</a></li>
+                <li><a href="eventos.php" id="">Ver Eventos</a></li>
                 <li><a href=" " id="">Mis datos</a></li>
               </ul>
             </nav>

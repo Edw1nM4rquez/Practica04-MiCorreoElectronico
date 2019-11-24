@@ -32,7 +32,7 @@
  <?php
 
  $codigo = $_GET["codigo"];
- $sql = "SELECT * FROM usuario where usu_codigo=$codigo";
+ $sql = "SELECT * FROM reunion where re_codigo=$codigo";
 
  include '../../../config/conexionBD.php';
  $result = $conn->query($sql);
@@ -41,44 +41,51 @@
 
  while($row = $result->fetch_assoc()) {
  ?>
- <form id="formulario01" method="POST" action="../../controladores/administrador/eliminar.php">
+ <form id="formulario01" method="POST" action="../../controladores/administrador/eliminarE.php">
  <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
- <label for="cedula">Cedula (*)</label>
- <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>"
+ <label for="fecha">Fecha (*)</label>
+ <input type="date" id="fecha" name="fecha" value="<?php echo $row["re_fecha_re"]; ?>"
 disabled/>
  <br>
  <br>
- <label for="nombres">Nombres (*)</label>
- <input type="text" id="nombres" name="nombres" value="<?php echo $row["usu_nombres"];
+ <label for="tema">Tema (*)</label>
+ <input type="text" id="tema" name="tema" value="<?php echo $row["re_tema"];
 ?>" disabled/>
  <br>
  <br>
- <label for="apellidos">Apelidos (*)</label>
- <input type="text" id="apellidos" name="apellidos" value="<?php echo $row["usu_apellidos"];
+ <label for="hora">Hora (*)</label>
+ <input type="time" id="hora" name="hora" value="<?php echo $row["re_hora"];
 ?>" disabled/>
  <br>
  <br>
- <label for="direccion">Dirección (*)</label>
- <input type="text" id="direccion" name="direccion" value="<?php echo $row["usu_direccion"];
+ <label for="lugar">Lugar (*)</label>
+ <input type="text" id="lugar" name="lugar" value="<?php echo $row["re_lugar"];
 ?>" disabled/>
  <br>
  <br>
- <label for="telefono">Teléfono (*)</label>
- <input type="text" id="telefono" name="telefono" value="<?php echo $row["usu_telefono"];
+ <label for="cordenada">Cordenada (*)</label>
+ <input type="text" id="cordenada" name="cordenada" value="<?php echo $row["re_coordenada"];
 ?>" disabled/>
  <br>
  <br>
- <label for="fecha">Fecha Nacimiento (*)</label>
- <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo
-$row["usu_fecha_nacimiento"]; ?>" disabled/>
+ <label for="remitente">Remitente (*)</label>
+ <input type="text" id="remitente" name="remitente" value="<?php echo
+$row["re_remitente"]; ?>" disabled/>
  <br>
  <br>
- <label for="correo">Correo electrónico (*)</label>
- <input type="email" id="correo" name="correo" value="<?php echo $row["usu_correo"]; ?>"
+ <label for="motivo">Motivo (*)</label>
+ <input type="text" id="motivo" name="motivo" value="<?php echo $row["re_motivo"]; ?>"
 disabled/>
+ <br>
+ <br>
+ <label for="observacion">Observacion (*)</label>
+ <input type="text" id="observacion" name="observacion" value="<?php echo $row["re_observacion"]; ?>"
+disabled/>
+ <br>
  <br>
  <br>
  <input type="submit" id="eliminar" name="eliminar" value="Eliminar" />
+
  <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
  </form>
  <?php
