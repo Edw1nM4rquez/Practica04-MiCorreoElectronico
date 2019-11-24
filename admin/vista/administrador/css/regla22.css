@@ -1,0 +1,237 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+
+    /* background-repeat: no-repeat; */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+html {
+	font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
+
+header{
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+
+
+#btn_menu {
+    display: none;
+}
+
+header .menuIm{
+   width:30px; 
+   height:30px;
+}
+
+header label {
+    display: none;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border-right:1px solid #fff ;
+}
+
+header label:hover{
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.menu ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+th td .enlace {
+    text-decoration: none;
+    display: block;
+    color: #fff;
+}
+
+/* li a:hover {
+   
+    color: white;
+
+    
+}  */
+
+
+.menu li:hover{
+   background: #333;
+}
+
+.menu li a {
+   display: block;
+   padding: 15px 20px;
+   color: #fff;
+   text-decoration: none;
+}
+
+table{
+    border: 1px solid #000;
+    padding: 2px;
+}
+
+th, td {
+    text-align: justify;
+    border: 1px solid #000;
+    padding: 4px;
+ }
+
+.perfil{
+     width: 150px;
+     height: 100px;
+ }
+
+.usrios{
+    text-align: center;
+} 
+/*--------------------------------*/
+
+
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+}	
+	#main-header a {
+		color: white;
+	}
+ 
+/*
+ * Logo
+ */
+#logo-header {
+	float: left;
+	padding: 15px 0 0 20px;
+	text-decoration: none;
+}
+	#logo-header:hover {
+		color: #0b76a6;
+	}
+	
+	#logo-header .site-name {
+		display: block;
+		font-weight: 500;
+		font-size: 1.2em;
+	}
+	
+	#logo-header .site-desc {
+		display: block;
+		font-weight: 500;
+		font-size: 0.8em;
+		color: #999;
+	}
+	
+ 
+/*
+ * Navegación
+ */
+nav {
+	float: right;
+}
+	nav ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-right: 20px;
+	}
+	
+		nav ul li {
+			display: inline-block;
+			line-height: 80px;
+		}
+			
+			nav ul li a {
+				display: block;
+				padding: 0 10px;
+				text-decoration: none;
+			}
+			
+				nav ul li a:hover {
+					background: #0b76a6;
+                }
+                /*Con estos estilos aplicaremos diseño al contenido:*/
+                #main-content {
+                    background-image: url("../img/fondo2.jpg");
+                    width: 100%;
+                    background-size: 100%;
+                    max-width: 1000px;
+                    margin: 20px auto;
+                    box-shadow: 0 0 10px rgba(0,0,0,.1);
+                }
+                 
+                    #main-content header,
+                    #main-content .content {
+                        padding: 40px;
+                    }
+
+                  
+    
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+	
+	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	top: 0; /* Posicionamos la cabecera pegada arriba */
+	position: fixed; /* Hacemos que la cabecera tenga una posición fija */
+}
+
+/*  los pie de páginaCSS*/
+
+
+#main-footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 40px;
+}
+	#main-footer p {
+		margin: 0;
+	}
+	
+	#main-footer a {
+		color: white;
+	}
+
+#main-footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 40px;
+}
+	#main-footer p {
+		margin: 0;
+	}
+	
+	#main-footer a {
+        color: white;
+        border-radius: 8px;
+    }
+    
+    body{
+        background-image: url(../img/fondo2.jpg);
+    }
+    /*necesitamso espacios lo unico que se me ocurrio para hacerlo rapido*/
+
+#iconomenu{
+    width: 10%;
+    height: 20%;
+}
+

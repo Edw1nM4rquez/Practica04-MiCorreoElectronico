@@ -29,9 +29,11 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 
             <nav>
               <ul>
-                <li><a href="#"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
+                <li><a href="cuenta.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
-                <li><a href="crear_reuniones.html" id="">Crear Evento</a></li>
+                <li><a href="crear_reuniones.php" id="">Crear Evento</a></li>
+                <li><a href=" " id="">Mis datos</a></li>
+                <li><a href="" id="">Cambiar contraseña</a></li>
               </ul>
             </nav>
         </header>
@@ -41,12 +43,16 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
        <br>
 
         
-        <form id="formulario01" action="asistir.php" method="POST" >
+        <form id="formulario01" action="../../controladores/usuario/reAsistir.php" method="POST" >
         <br>
         <label for="regis">Ingrese el codigo del evento que deceas asistir :</label>
                 <input type="text" id="regis" name="regis" value="" placeholder="Ingrese el codigo" />
         
                 <br>
+                <label for="nombres">Nombres :</label>
+                <input type="text" id="nombres" name="nombres" value="" placeholder="Ingrese sus nombres y apellidos" />
+                <br>
+<br>
                 <input type="button" onclick="history.back()"  class="regresar" id="regresar" name="regresar" value="Regresar" 
                 style="  background: linear-gradient(#FFDA63, #FFB940);
                          border: 0;
@@ -120,13 +126,50 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 
                     } else {
                         echo "<tr>";
-                        echo " <td colspan='7'> No existen eventos registrados en el sistema </td>";
+                        echo " <td colspan='7'> No existen eventos registradas en el sistema </td>";
                         echo "</tr>";
                         }
                     $conn->close();
             ?>
         </table>
+        <br>
+        <br>
+        <br>
+<!-- vamos a ver si funciona-->
+<table style="width:50% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
+            <tr>
+                <th>Codigo Reunion</th>
+                <th>Asistentes a las reuniones</th>
+               
+                
+            </tr>
+            <?php
+                    include '../../../config/conexionBD.php';
+                    $sql = "SELECT * FROM registro ; " ;
+                    $result = $conn->query($sql);
 
+                    if ($result->num_rows > 0) {
+
+                            $sql = "SELECT * FROM registro; " ;
+                            $result = $conn->query($sql);
+                            while($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo " <td>" . $row["re_usu_re_codigo"] . "</td>";
+                                echo " <td>" . $row["re_usu_asistente"] . "</td>";
+                      
+                                echo "</tr>";
+                                
+                            }
+
+                    } else {
+                        echo "<tr>";
+                        echo " <td colspan='7'> No existen confirmaciones registrados en el sistema </td>";
+                        echo "</tr>";
+                        }
+                    $conn->close();
+            ?>
+        </table>
+        <br>
     </div>
     <br>
     <br>

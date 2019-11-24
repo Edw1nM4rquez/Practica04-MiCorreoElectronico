@@ -19,7 +19,7 @@ MD5('$contrasena') and usu_tipo_user ='admin' ";
  header("Location: ../../admin/vista/usuario/cuenta.php");
  } else if ($result1->num_rows > 0){
     $_SESSION['isLogged'] = TRUE;
-    header("Location: ../../admin/vista/usuario/cuenta2.php");
+    header("Location: ../../admin/vista/administrador/adminW.php");
 
     }else{
         header("Location: ../vista/login.html");
