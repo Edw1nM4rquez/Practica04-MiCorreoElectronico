@@ -81,7 +81,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
         
         <label for="nombres">Buscar Evento:</label>
         <form  onsubmit="return buscarPormotivo()">
-                <input type="text" id="cedula" name="cedula" value="" placeholder="Busqueda por motivo">
+                <input type="text" id="cedula" name="cedula" value="">
                 <input type="button" id="buscar" name="buscar" value="Buscar" onkeypress="buscarPormotivo()">
         </form>
         <br>

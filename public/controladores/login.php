@@ -7,7 +7,7 @@
  $contrasena = isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
  
  $sql = "SELECT * FROM usuario WHERE usu_correo = '$usuario' and usu_password =
-MD5('$contrasena') and usu_tipo_user ='user' ";
+MD5('$contrasena') and usu_tipo_user ='user' and usu_eliminado='N'";
 
 $sql1 = "SELECT * FROM usuario WHERE usu_correo = '$usuario' and usu_password =
 MD5('$contrasena') and usu_tipo_user ='admin' ";
