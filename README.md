@@ -60,11 +60,11 @@ Agregar roles a la tabla usuario. Un usuario puede tener un rol de “admin” o
 
 -Interfaz
 
- 
+   <img src="imagenes/img3.png">
+  
+   <img src="imagenes/img4.png">
 
- 
-
- 
+ <img src="imagenes/img5.png">
 
 b)	Los usuarios con rol de “admin” pueden: modificar, eliminar y cambiar la contraseña de cualquier usuario de la base de datos.
 -Codigo
@@ -169,11 +169,7 @@ contraseña</a> </td>";
 
 -Interfaz
  
-  <img src="imagenes/img3.png">
-  
-   <img src="imagenes/img4.png">
 
- <img src="imagenes/img5.png">
  
 c)	Los usuarios con rol de “user” pueden modificar, eliminar y cambiar la contraseña de su usuario.
 -Codigo
