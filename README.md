@@ -169,7 +169,7 @@ contraseña</a> </td>";
 
 -Interfaz
  
-
+<img src="imagenes/img8.png">
  
 c)	Los usuarios con rol de “user” pueden modificar, eliminar y cambiar la contraseña de su usuario.
 -Codigo
@@ -267,6 +267,8 @@ echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eli
 </html>
 
 -Interfaz
+ 
+ <img src="imagenes/img9.png">
  
 3.	Luego, con base a estos ajustes realizados, se pide desarrollar una aplicación web usando
 PHP y Base de Datos que permita gestionar reuniones entre usuarios de la aplicación. De
