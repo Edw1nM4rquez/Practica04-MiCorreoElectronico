@@ -6,7 +6,8 @@
 2.	Con base al archivo PHP (Apuntes y ejercicios), se pide realizar los siguientes ajustes:
 Agregar roles a la tabla usuario. Un usuario puede tener un rol de “admin” o “user”.
 -Base de datos
- 
+  <img src="imagenes/img2.png">
+  
 -Codigo insertamos y agregamos los roles  
 <!DOCTYPE html>
 <html>
@@ -168,10 +169,15 @@ contraseña</a> </td>";
 
 -Interfaz
  
+  <img src="imagenes/img3.png">
+  
+   <img src="imagenes/img4.png">
 
-
+ <img src="imagenes/img5.png">
+ 
 c)	Los usuarios con rol de “user” pueden modificar, eliminar y cambiar la contraseña de su usuario.
 -Codigo
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -266,7 +272,6 @@ echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eli
 
 -Interfaz
  
-
 3.	Luego, con base a estos ajustes realizados, se pide desarrollar una aplicación web usando
 PHP y Base de Datos que permita gestionar reuniones entre usuarios de la aplicación. De
 las reuniones se desea conocer la fecha y hora, lugar, coordenadas (latitud y longitud)
