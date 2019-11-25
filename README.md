@@ -1,165 +1,168 @@
 
-Diagrama  SQL 
+1.Diagrama  SQL 
+ 
+ <img src="imagenes/img1.png">
  
 2.	Con base al archivo PHP (Apuntes y ejercicios), se pide realizar los siguientes ajustes:
-Agregar roles a la tabla usuario. Un usuario puede tener un rol de “admin” o “user”.
+Agregar roles a la tabla usuario. Un usuario puede tener un rol de â€œadminâ€ o â€œuserâ€.
 -Base de datos
- 
+  <img src="imagenes/img2.png">
+  
 -Codigo insertamos y agregamos los roles  
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Crear Nuevo Usuario</title>
- <style type="text/css" rel="stylesheet">
- .error{
- color: red;
- }
- </style>
+Â <metaÂ charset="UTF-8">
+Â <title>CrearÂ NuevoÂ Usuario</title>
+Â <styleÂ type="text/css"Â rel="stylesheet">
+Â .error{
+Â color:Â red;
+Â }
+Â </style>
 </head>
 <body>
- <?php
- 
- //incluir conexión a la base de datos
- include '../../config/conexionBD.php';
- $cedula = isset($_POST["cedula"]) ? trim($_POST["cedula"]) : null;
- $nombres = isset($_POST["nombres"]) ? mb_strtoupper(trim($_POST["nombres"]), 'UTF-8') : null;
- $apellidos = isset($_POST["apellidos"]) ? mb_strtoupper(trim($_POST["apellidos"]), 'UTF-8') :
- null;
- $direccion = isset($_POST["direccion"]) ? mb_strtoupper(trim($_POST["direccion"]), 'UTF-8') :
- null;
- $telefono = isset($_POST["telefono"]) ? trim($_POST["telefono"]): null;
- $correo = isset($_POST["correo"]) ? trim($_POST["correo"]): null;
- $fechaNacimiento = isset($_POST["fechaNacimiento"]) ? trim($_POST["fechaNacimiento"]): null;
- $contrasena = isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
+Â <?php
+Â 
+Â //incluirÂ conexiÃ³nÂ aÂ laÂ baseÂ deÂ datos
+Â includeÂ '../../config/conexionBD.php';
+Â $cedulaÂ =Â isset($_POST["cedula"])Â ?Â trim($_POST["cedula"])Â :Â null;
+Â $nombresÂ =Â isset($_POST["nombres"])Â ?Â mb_strtoupper(trim($_POST["nombres"]),Â 'UTF-8')Â :Â null;
+Â $apellidosÂ =Â isset($_POST["apellidos"])Â ?Â mb_strtoupper(trim($_POST["apellidos"]),Â 'UTF-8')Â :
+Â null;
+Â $direccionÂ =Â isset($_POST["direccion"])Â ?Â mb_strtoupper(trim($_POST["direccion"]),Â 'UTF-8')Â :
+Â null;
+Â $telefonoÂ =Â isset($_POST["telefono"])Â ?Â trim($_POST["telefono"]):Â null;
+Â $correoÂ =Â isset($_POST["correo"])Â ?Â trim($_POST["correo"]):Â null;
+Â $fechaNacimientoÂ =Â isset($_POST["fechaNacimiento"])Â ?Â trim($_POST["fechaNacimiento"]):Â null;
+Â $contrasenaÂ =Â isset($_POST["contrasena"])Â ?Â trim($_POST["contrasena"])Â :Â null;
 
- $sql = "INSERT INTO usuario VALUES (0, '$cedula', '$nombres', '$apellidos', '$direccion', 
+Â $sqlÂ =Â "INSERTÂ INTOÂ usuarioÂ VALUESÂ (0,Â '$cedula',Â '$nombres',Â '$apellidos',Â '$direccion',Â 
 '$telefono',
-'$correo', MD5('$contrasena'), '$fechaNacimiento', 'N', null, null,'user')";
- if ($conn->query($sql) === TRUE) {
-    header("Location: ../../admin/vista/usuario/cuenta.php");
+'$correo',Â MD5('$contrasena'),Â '$fechaNacimiento',Â 'N',Â null,Â null,'user')";
+Â ifÂ ($conn->query($sql)Â ===Â TRUE)Â {
+Â Â Â Â header("Location:Â ../../admin/vista/usuario/cuenta.php");
 
- } else {
- if($conn->errno == 1062){
- echo "<p class='error'>La persona con la cedula $cedula ya esta registrada en el sistema </p>";
- }else{
- echo "<p class='error'>Error: " . mysqli_error($conn) . "</p>";
- }
- }
+Â }Â elseÂ {
+Â if($conn->errnoÂ ==Â 1062){
+Â echoÂ "<pÂ class='error'>LaÂ personaÂ conÂ laÂ cedulaÂ $cedulaÂ yaÂ estaÂ registradaÂ enÂ elÂ sistemaÂ </p>";
+Â }else{
+Â echoÂ "<pÂ class='error'>Error:Â "Â .Â mysqli_error($conn)Â .Â "</p>";
+Â }
+Â }
 
- //cerrar la base de datos
- $conn->close();
- 
+Â //cerrarÂ laÂ baseÂ deÂ datos
+Â $conn->close();
+Â 
 
- ?>
+Â ?>
 </body>
 </html>
 
 -Interfaz
 
- 
+   <img src="imagenes/img3.png">
+  
+   <img src="imagenes/img4.png">
 
- 
+ <img src="imagenes/img5.png">
 
- 
-
-b)	Los usuarios con rol de “admin” pueden: modificar, eliminar y cambiar la contraseña de cualquier usuario de la base de datos.
+b)	Los usuarios con rol de â€œadminâ€ pueden: modificar, eliminar y cambiar la contraseÃ±a de cualquier usuario de la base de datos.
 -Codigo
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Gestión de usuarios</title>
- <link rel="stylesheet" href="css/regla22.css">
+Â <metaÂ charset="UTF-8">
+Â <title>GestiÃ³nÂ deÂ usuarios</title>
+Â <linkÂ rel="stylesheet"Â href="css/regla22.css">
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">Administrador</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">CerrarÂ Sesion
 </a></li>
-                <li><a href="eventos.php" id="">Ver Eventos</a></li>
-                <li><a href=" " id="">Mis datos</a></li>
-              </ul>
-            </nav>
-        </header>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="eventos.php"Â id="">VerÂ Eventos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="Â "Â id="">MisÂ datos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
 
- <table style="width:100%">
- <tr>
- <th>Cedula</th>
- <th>Nombres</th>
- <th>Apellidos</th>
- <th>Dirección</th>
- <th>Telefono</th>
- <th>Correo</th>
- <th>Fecha Nacimiento</th>
- <th>Eliminar</th>
- <th>Modificar</th>
- <th>Cambiar</th>
- </tr>
- <?php
- include '../../../config/conexionBD.php';
- $sql = "SELECT * FROM usuario where usu_eliminado= 'N'";
- $result = $conn->query($sql);
+Â <tableÂ style="width:100%">
+Â <tr>
+Â <th>Cedula</th>
+Â <th>Nombres</th>
+Â <th>Apellidos</th>
+Â <th>DirecciÃ³n</th>
+Â <th>Telefono</th>
+Â <th>Correo</th>
+Â <th>FechaÂ Nacimiento</th>
+Â <th>Eliminar</th>
+Â <th>Modificar</th>
+Â <th>Cambiar</th>
+Â </tr>
+Â <?php
+Â includeÂ '../../../config/conexionBD.php';
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ usuarioÂ whereÂ usu_eliminado=Â 'N'";
+Â $resultÂ =Â $conn->query($sql);
 
- if ($result->num_rows > 0) {
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
- while($row = $result->fetch_assoc()) {
- echo "<tr>";
- echo " <td>" . $row["usu_cedula"] . "</td>";
- echo " <td>" . $row['usu_nombres'] ."</td>";
- echo " <td>" . $row['usu_apellidos'] . "</td>";
- echo " <td>" . $row['usu_direccion'] . "</td>";
- echo " <td>" . $row['usu_telefono'] . "</td>";
- echo " <td>" . $row['usu_correo'] . "</td>";
- echo " <td>" . $row['usu_fecha_nacimiento'] . "</td>";
- echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eliminar</a> </td>";
- echo " <td> <a href='modificar.php?codigo=" . $row['usu_codigo'] . "'>Modificar</a> </td>";
- echo " <td> <a href='cambiar_contrasena.php?codigo=" . $row['usu_codigo'] . "'>Cambiar
-contraseña</a> </td>";
+Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â echoÂ "<tr>";
+Â echoÂ "Â <td>"Â .Â $row["usu_cedula"]Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_nombres']Â ."</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_apellidos']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_direccion']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_telefono']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_correo']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_fecha_nacimiento']Â .Â "</td>";
+Â echoÂ "Â <td>Â <aÂ href='eliminar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Eliminar</a>Â </td>";
+Â echoÂ "Â <td>Â <aÂ href='modificar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Modificar</a>Â </td>";
+Â echoÂ "Â <td>Â <aÂ href='cambiar_contrasena.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Cambiar
+contraseÃ±a</a>Â </td>";
 
- echo "</tr>";
+Â echoÂ "</tr>";
 
- }
- } else {
- echo "<tr>";
- echo " <td colspan='7'> No existen usuarios registradas en el sistema </td>";
- echo "</tr>";
- }
- $conn->close();
- ?>
- </table>
- 
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
+Â }
+Â }Â elseÂ {
+Â echoÂ "<tr>";
+Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ usuariosÂ registradasÂ enÂ elÂ sistemaÂ </td>";
+Â echoÂ "</tr>";
+Â }
+Â $conn->close();
+Â ?>
+Â </table>
+Â 
+Â <br>
+Â <br>
+Â <br>
+Â <br>
+Â <br>
+Â <br>
+Â <br>
+Â <br>
 
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana &#128274;
- <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ SalesianaÂ &#128274;
+Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
@@ -167,485 +170,485 @@ contraseña</a> </td>";
 -Interfaz
  
 
-
-c)	Los usuarios con rol de “user” pueden modificar, eliminar y cambiar la contraseña de su usuario.
+ 
+c)	Los usuarios con rol de â€œuserâ€ pueden modificar, eliminar y cambiar la contraseÃ±a de su usuario.
 -Codigo
-<!DOCTYPE html>
+
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Gestión de usuarios</title>
- <link rel="stylesheet" href="css/regla2.css">
+Â <metaÂ charset="UTF-8">
+Â <title>GestiÃ³nÂ deÂ usuarios</title>
+Â <linkÂ rel="stylesheet"Â href="css/regla2.css">
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">User</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">User</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">CerrarÂ Sesion
 </a></li>
-                <li><a href="cuenta.php" id="">Volver</a></li>
-              </ul>
-            </nav>
-        </header>
-        <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="cuenta.php"Â id="">Volver</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
 
- <table style="width:100%">
- <tr>
- <th>Cedula</th>
- <th>Nombres</th>
- <th>Apellidos</th>
- <th>Dirección</th>
- <th>Telefono</th>
- <th>Correo</th>
- <th>Fecha Nacimiento</th>
- <th>Modificar</th>
- <th>Cambiar</th>
- <th>Eliminar</th>
+Â <tableÂ style="width:100%">
+Â <tr>
+Â <th>Cedula</th>
+Â <th>Nombres</th>
+Â <th>Apellidos</th>
+Â <th>DirecciÃ³n</th>
+Â <th>Telefono</th>
+Â <th>Correo</th>
+Â <th>FechaÂ Nacimiento</th>
+Â <th>Modificar</th>
+Â <th>Cambiar</th>
+Â <th>Eliminar</th>
 
- </tr>
- <?php
+Â </tr>
+Â <?php
 
- 
+Â 
 session_start();
- 
-include '../../../config/conexionBD.php';
- 
- $contrasena = isset($_POST["contrasena"]) ? trim($_POST["contrasena"]) : null;
+Â 
+includeÂ '../../../config/conexionBD.php';
+Â 
+Â $contrasenaÂ =Â isset($_POST["contrasena"])Â ?Â trim($_POST["contrasena"])Â :Â null;
 
- $sql = "SELECT * FROM usuario where usu_eliminado= 'N' and usu_password=MD5('$contrasena')
- and usu_tipo_user ='user'";
- $result = $conn->query($sql);
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ usuarioÂ whereÂ usu_eliminado=Â 'N'Â andÂ usu_password=MD5('$contrasena')
+Â andÂ usu_tipo_userÂ ='user'";
+Â $resultÂ =Â $conn->query($sql);
 
- if ($result->num_rows > 0) {
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
- while($row = $result->fetch_assoc()) {
- echo "<tr>";
- echo " <td>" . $row["usu_cedula"] . "</td>";
- echo " <td>" . $row['usu_nombres'] ."</td>";
- echo " <td>" . $row['usu_apellidos'] . "</td>";
- echo " <td>" . $row['usu_direccion'] . "</td>";
- echo " <td>" . $row['usu_telefono'] . "</td>";
- echo " <td>" . $row['usu_correo'] . "</td>";
- echo " <td>" . $row['usu_fecha_nacimiento'] . "</td>";
- echo " <td> <a href='modificar.php?codigo=" . $row['usu_codigo'] . "'>Modificar</a> </td>";
- echo " <td> <a href='cambiar_contrasena.php?codigo=" . $row['usu_codigo'] . "'>Cambiar
-contraseña</a> </td>";
-echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eliminar</a> </td>";
- echo "</tr>";
+Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â echoÂ "<tr>";
+Â echoÂ "Â <td>"Â .Â $row["usu_cedula"]Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_nombres']Â ."</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_apellidos']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_direccion']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_telefono']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_correo']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_fecha_nacimiento']Â .Â "</td>";
+Â echoÂ "Â <td>Â <aÂ href='modificar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Modificar</a>Â </td>";
+Â echoÂ "Â <td>Â <aÂ href='cambiar_contrasena.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Cambiar
+contraseÃ±a</a>Â </td>";
+echoÂ "Â <td>Â <aÂ href='eliminar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Eliminar</a>Â </td>";
+Â echoÂ "</tr>";
 
- }
- } else {
-      header("Location: seguridad.php");
+Â }
+Â }Â elseÂ {
+Â Â Â Â Â Â header("Location:Â seguridad.php");
 
- }
- $conn->close();
- ?>
- </table>
- 
+Â }
+Â $conn->close();
+Â ?>
+Â </table>
+Â 
 
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana 
-&#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ SalesianaÂ 
+&#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
 
 -Interfaz
  
-
-3.	Luego, con base a estos ajustes realizados, se pide desarrollar una aplicación web usando
-PHP y Base de Datos que permita gestionar reuniones entre usuarios de la aplicación. De
+3.	Luego, con base a estos ajustes realizados, se pide desarrollar una aplicaciÃ³n web usando
+PHP y Base de Datos que permita gestionar reuniones entre usuarios de la aplicaciÃ³n. De
 las reuniones se desea conocer la fecha y hora, lugar, coordenadas (latitud y longitud)
-remitente (quien invita), invitados (quienes asisten), motivo de la reunión y observaciones.
-Para lo cuál, se pide como mínimo los siguientes requerimientos:
+remitente (quien invita), invitados (quienes asisten), motivo de la reuniÃ³n y observaciones.
+Para lo cuÃ¡l, se pide como mÃ­nimo los siguientes requerimientos:
 Usuario con rol de user:
 
-d)	Visualizar en su página principal (index.php) el listado de todas las reuniones
-agendadas, ordenados por las más recientes.
+d)	Visualizar en su pÃ¡gina principal (index.php) el listado de todas las reuniones
+agendadas, ordenados por las mÃ¡s recientes.
  
 
 -Codigo
 <?php
 session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
+if(!isset($_SESSION['isLogged'])Â ||Â $_SESSION['isLogged']===FALSE){
+Â Â Â Â header("Location:Â /Practica04/public/vista/login.html");
 }
 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/regla2.css">
-    <script type="text/javascript" src="js/ajax.js"></script>
-    <title>Cuenta</title>
+Â Â Â Â <metaÂ charset="UTF-8">
+Â Â Â Â <linkÂ rel="stylesheet"Â href="css/regla2.css">
+Â Â Â Â <scriptÂ type="text/javascript"Â src="js/ajax.js"></script>
+Â Â Â Â <title>Cuenta</title>
 </head>
 
 <body>
 
-    <div class="contenedor">
+Â Â Â Â <divÂ class="contenedor">
 
-    <header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">User </span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+Â Â Â Â <headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">UserÂ </span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="cuenta.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="cuenta.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">CerrarÂ Sesion
 </a></li>
-                <li><a href="crear_reuniones.php" id="">Crear Evento</a></li>
-                <li><a href="seguridad.php" id="">Mis datos</a></li>
-              </ul>
-            </nav>
-        </header>
-        <br>
-      
-        <form id="formulario01" action="../../controladores/usuario/reAsistir.php" method="POST" >
-        <br>
-        <label for="regis">Ingrese el codigo del evento que deceas asistir :</label>
-                <input type="text" id="regis" name="regis" value="" placeholder="Ingrese el 
-codigo" />
-        
-                <br>
-                <label for="nombres">Nombres :</label>
-                <input type="text" id="nombres" name="nombres" value="" placeholder="Ingrese 
-sus nombres y apellidos" />
-                <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="crear_reuniones.php"Â id="">CrearÂ Evento</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="seguridad.php"Â id="">MisÂ datos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â <formÂ id="formulario01"Â action="../../controladores/usuario/reAsistir.php"Â method="POST"Â >
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <labelÂ for="regis">IngreseÂ elÂ codigoÂ delÂ eventoÂ queÂ deceasÂ asistirÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="regis"Â name="regis"Â value=""Â placeholder="IngreseÂ elÂ 
+codigo"Â />
+Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="nombres">NombresÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="nombres"Â name="nombres"Â value=""Â placeholder="IngreseÂ 
+susÂ nombresÂ yÂ apellidos"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
 <br>
 
-                <input type="submit" class="ingresar" id="crear" name="crear" value="Aceptar" 
-                style="  background: linear-gradient(#FFDA63, #FFB940);
-                         border: 0;
-                            color: brown;
-                             opacity: 0.8;
-                                 cursor: pointer;
-                                    border-radius: 25px;
-                                     height: 40px;
-                                     width:10%;
-                                         text-align: center;" />
-             </form> 
-             <br>
-                <br>
-        <br>
-        
-        <label for="nombres">Buscar Evento:</label>
-        <form  onsubmit="return buscarPormotivo()">
-                <input type="text" id="cedula" name="cedula" value="">
-                <input type="button" id="buscar" name="buscar" value="Buscar" 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="submit"Â class="ingresar"Â id="crear"Â name="crear"Â value="Aceptar"Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â style="Â Â background:Â linear-gradient(#FFDA63,Â #FFB940);
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â border:Â 0;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â color:Â brown;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â opacity:Â 0.8;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â cursor:Â pointer;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â border-radius:Â 25px;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â height:Â 40px;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â width:10%;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â text-align:Â center;"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â </form>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â <labelÂ for="nombres">BuscarÂ Evento:</label>
+Â Â Â Â Â Â Â Â <formÂ Â onsubmit="returnÂ buscarPormotivo()">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="cedula"Â name="cedula"Â value="">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="button"Â id="buscar"Â name="buscar"Â value="Buscar"Â 
 onclick="buscarPormotivo()">
-        </form>
-        <br>
-        <div id="informacion"><b>Eventos</b>
+Â Â Â Â Â Â Â Â </form>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <divÂ id="informacion"><b>Eventos</b>
 
-        <br>
-        <br>
-        <br>
-        <table style="width:100% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
-            <tr>
-                <th>Codigo</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Lugar</th>
-                <th>Cordenadas</th>
-                <th>Remitente</th>
-                <th>Motivos</th>
-                <th>Observaciones</th>
-                <th>Fecha Creacion</th>
-                <th>Estado Reunion</th>
-                
-            </tr>
-            <?php
-                    include '../../../config/conexionBD.php';
-                    $sql = "SELECT * FROM reunion ; " ;
-                    $result = $conn->query($sql);
-
-
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <tableÂ style="width:100%Â ;Â background-color:rgba(75,Â 72,Â 69,Â 0.705)Â ;Â color:white">
+Â Â Â Â Â Â Â Â Â Â Â Â <tr>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Codigo</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Asunto</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Fecha</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Hora</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Lugar</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Cordenadas</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Remitente</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Motivos</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Observaciones</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>FechaÂ Creacion</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>EstadoÂ Reunion</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â </tr>
+Â Â Â Â Â Â Â Â Â Â Â Â <?php
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â includeÂ '../../../config/conexionBD.php';
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunionÂ ;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
 
 
-                    if ($result->num_rows > 0) {
 
-                            $sql = "SELECT * FROM reunion; " ;
-                            $result = $conn->query($sql);
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo " <td>" . $row["re_codigo"] . "</td>";
-                                echo " <td>" . $row["re_fecha_re"] . "</td>";
-                                echo " <td>" . $row['re_tema'] ."</td>";
-                                echo " <td>" . $row['re_hora'] . "</td>";
-                                echo " <td>" . $row['re_lugar'] . "</td>";
-                                echo " <td>" . $row['re_coordenada'] . "</td>";
-                                echo " <td>" . $row['re_remitente'] . "</td>";
-                                echo " <td>" . $row['re_motivo'] . "</td>";
-                                echo " <td>" . $row['re_observacion'] . "</td>";
-                                echo " <td>" . $row['re_fecha_creacion'] . "</td>";
-                                echo " <td>" . $row['re_eliminada'] . "</td>";
-                                
-                                echo "</tr>";
-                                
-                            }
 
-                    } else {
-                        echo "<tr>";
-                        echo " <td colspan='7'> No existen eventos registradas en
- el sistema </td>";
-                        echo "</tr>";
-                        }
-                    $conn->close();
-            ?>
-        </table>
-        <br>
-        <br>
-        <br>
-<!-- vamos a ver si funciona-->
-<table style="width:50% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
-            <tr>
-                <th>Codigo Reunion</th>
-                <th>Asistentes a las reuniones</th>
-               
-                
-            </tr>
-            <?php
-                    include '../../../config/conexionBD.php';
-                    $sql = "SELECT * FROM reunion where re_eliminada= 'N' ; " ;
-                    $result = $conn->query($sql);
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
-                    if ($result->num_rows > 0) {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunion;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_codigo"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_fecha_re"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_tema']Â ."</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_hora']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_lugar']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_coordenada']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_remitente']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_motivo']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_observacion']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_fecha_creacion']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_eliminada']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
 
-                            $sql = "SELECT * FROM registro; " ;
-                            $result = $conn->query($sql);
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo " <td>" . $row["re_usu_re_codigo"] . "</td>";
-                                echo " <td>" . $row["re_usu_asistente"] . "</td>";
-                      
-                                echo "</tr>";
-                                
-                            }
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â elseÂ {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ eventosÂ registradasÂ en
+Â elÂ sistemaÂ </td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $conn->close();
+Â Â Â Â Â Â Â Â Â Â Â Â ?>
+Â Â Â Â Â Â Â Â </table>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+<!--Â vamosÂ aÂ verÂ siÂ funciona-->
+<tableÂ style="width:50%Â ;Â background-color:rgba(75,Â 72,Â 69,Â 0.705)Â ;Â color:white">
+Â Â Â Â Â Â Â Â Â Â Â Â <tr>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>CodigoÂ Reunion</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>AsistentesÂ aÂ lasÂ reuniones</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â </tr>
+Â Â Â Â Â Â Â Â Â Â Â Â <?php
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â includeÂ '../../../config/conexionBD.php';
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunionÂ whereÂ re_eliminada=Â 'N'Â ;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
 
-                    } else {
-                        echo "<tr>";
-                        echo " <td colspan='7'> No existen confirmaciones registrados
- en el sistema </td>";
-                        echo "</tr>";
-                        }
-                    $conn->close();
-            ?>
-        </table>
-        <br>
-    </div>
-    <br>
-    <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
-    <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana 
-&#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
-   
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ registro;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_usu_re_codigo"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_usu_asistente"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
+
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â elseÂ {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ confirmacionesÂ registrados
+Â enÂ elÂ sistemaÂ </td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $conn->close();
+Â Â Â Â Â Â Â Â Â Â Â Â ?>
+Â Â Â Â Â Â Â Â </table>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â </div>
+Â Â Â Â <br>
+Â Â Â Â <br>
+
+Â Â Â Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ SalesianaÂ 
+&#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
+Â Â Â 
 
 </body>
 
 </html>
 
-e)	Crear reuniones e invitar a otros usuarios de la aplicación web.
+e)	Crear reuniones e invitar a otros usuarios de la aplicaciÃ³n web.
  
 -Codigo
 <?php
 session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
+if(!isset($_SESSION['isLogged'])Â ||Â $_SESSION['isLogged']===FALSE){
+Â Â Â Â header("Location:Â /Practica04/public/vista/login.html");
 }
 
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPEÂ html>
+<htmlÂ lang="es">
 
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <script type="text/javascript" src="js/validacion.js"></script>
-        <link rel="stylesheet" href="css/stylesF1.css">
-        <link rel="icon" type="image/png"  href="img/icono.png">
-        <title>Formulario</title>
+Â Â Â Â Â Â Â Â <metaÂ charset="UTF-8">
+Â Â Â Â Â Â Â Â <metaÂ name="viewport"Â content="width=device-width,Â initial-scale=1.0">
+Â Â Â Â Â Â Â Â <metaÂ http-equiv="X-UA-Compatible"Â content="ie=edge">
+Â Â Â Â Â Â Â Â <scriptÂ type="text/javascript"Â src="js/validacion.js"></script>
+Â Â Â Â Â Â Â Â <linkÂ rel="stylesheet"Â href="css/stylesF1.css">
+Â Â Â Â Â Â Â Â <linkÂ rel="icon"Â type="image/png"Â Â href="img/icono.png">
+Â Â Â Â Â Â Â Â <title>Formulario</title>
 </head>
 
 <body>
-        
+Â Â Â Â Â Â Â Â 
 
-        <form id="formulario01" action="../../controladores/usuario/crear_evento.php"
- method="POST" >
-                <h1>CREAR REUNIONES</h1>
-                <br>
-                <br>
-                <label for="asunto">Asunto :</label>
-                <input type="text" id="asunto" name="asunto" value="" 
-placeholder="Ingrese el asunto de la reunion" />
-                <br>
-                <br>
-                <label for="fecha">Fecha :</label>
-                <input type="date" id="fecha" name="fecha" value=""
- placeholder="Ingrese la fecha del evento" />
-                <br>
-                <br>
-                <label for="hora">Hora :</label>
-                <input type="time" id="hora" name="hora" value="" 
-placeholder="Ingrese la hora del evento"  />
-                
-                <br>
-                <br>
-                <label for="lugar">Lugar :</label>
-                <input type="text" id="lugar" name="lugar" value="" 
-placeholder="Ingrese el lugar de recepcion" />
-                <br>
-                <br>
-                <label for="cordenadas">Cordenadas :</label>
-                <input type="text" id="cordenadas" name="cordenadas" value="" 
-placeholder="Ingrese las coordenadas "/>
-                
-                <br>
-                <br>
-                <label for="remitente">Remitente :</label>
-                <input type="text" id="remitente" name="remitente" value="" 
-placeholder="Ingrese su nombre" />
+Â Â Â Â Â Â Â Â <formÂ id="formulario01"Â action="../../controladores/usuario/crear_evento.php"
+Â method="POST"Â >
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <h1>CREARÂ REUNIONES</h1>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="asunto">AsuntoÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="asunto"Â name="asunto"Â value=""Â 
+placeholder="IngreseÂ elÂ asuntoÂ deÂ laÂ reunion"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="fecha">FechaÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="date"Â id="fecha"Â name="fecha"Â value=""
+Â placeholder="IngreseÂ laÂ fechaÂ delÂ evento"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="hora">HoraÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="time"Â id="hora"Â name="hora"Â value=""Â 
+placeholder="IngreseÂ laÂ horaÂ delÂ evento"Â Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="lugar">LugarÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="lugar"Â name="lugar"Â value=""Â 
+placeholder="IngreseÂ elÂ lugarÂ deÂ recepcion"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="cordenadas">CordenadasÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="cordenadas"Â name="cordenadas"Â value=""Â 
+placeholder="IngreseÂ lasÂ coordenadasÂ "/>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="remitente">RemitenteÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="remitente"Â name="remitente"Â value=""Â 
+placeholder="IngreseÂ suÂ nombre"Â />
 
-                <br>
-                <br>
-                <label for="motivos">Motivos :</label>
-                <input type="text" id="motivos" name="motivos" value="" 
-placeholder="Ingrese el motivo de la creacion del evento" />
-               
-                <br>
-                <br>
-                <label for="observaciones">Observaciones :</label>
-                <input type="text" id="observaciones" name="observaciones" value=""
- placeholder="Ingrese las observaciones" />
-                <br>
-                <span id="mensajeContra"></span>
-                <br>
-                <br>
-               
-                
-                <div class="form_boton"> 
-                        <input type="button" onclick="history.back()"  class="regresar"
- id="regresar" name="regresar" value="Regresar" />
-                        <input type="submit" class="ingresar" id="crear" name="crear" 
-value="Aceptar" />
-                </div>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="motivos">MotivosÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="motivos"Â name="motivos"Â value=""Â 
+placeholder="IngreseÂ elÂ motivoÂ deÂ laÂ creacionÂ delÂ evento"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <labelÂ for="observaciones">ObservacionesÂ :</label>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="text"Â id="observaciones"Â name="observaciones"Â value=""
+Â placeholder="IngreseÂ lasÂ observaciones"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ id="mensajeContra"></span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <divÂ class="form_boton">Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="button"Â onclick="history.back()"Â Â class="regresar"
+Â id="regresar"Â name="regresar"Â value="Regresar"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <inputÂ type="submit"Â class="ingresar"Â id="crear"Â name="crear"Â 
+value="Aceptar"Â />
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </div>
 
-        </form>
-        
+Â Â Â Â Â Â Â Â </form>
+Â Â Â Â Â Â Â Â 
 </body>
 
 </html>
 
 
-f)	Buscar en las reuniones agendadas. La búsqueda se realizará por el motivo de la
-reunión y se deberá aplicar Ajax para la búsqueda.
+f)	Buscar en las reuniones agendadas. La bÃºsqueda se realizarÃ¡ por el motivo de la
+reuniÃ³n y se deberÃ¡ aplicar Ajax para la bÃºsqueda.
 
  
 
 -Codigo php
 <?php
- //incluir conexión a la base de datos
- include '../../../../config/conexionBD.php';
+Â //incluirÂ conexiÃ³nÂ aÂ laÂ baseÂ deÂ datos
+Â includeÂ '../../../../config/conexionBD.php';
 
- $cedula = $_GET['cedula'];
- //echo "Hola " . $cedula;
+Â $cedulaÂ =Â $_GET['cedula'];
+Â //echoÂ "HolaÂ "Â .Â $cedula;
 
- $sql = "SELECT * FROM reunion WHERE re_motivo='$cedula'";
-//cambiar la consulta para puede buscar por ocurrencias de letras
- $result = $conn->query($sql);
- echo " <table style='width:100%'>
- <tr>
-                <th>Codigo</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Lugar</th>
-                <th>Cordenadas</th>
-                <th>Remitente</th>
-                <th>Motivos</th>
-                <th>Observaciones</th>
-                <th>Fecha Creacion</th>
-                <th>Estado Reunion</th>
- </tr>";
- if ($result->num_rows > 0) {
- while($row = $result->fetch_assoc()) {
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunionÂ WHEREÂ re_motivo='$cedula'";
+//cambiarÂ laÂ consultaÂ paraÂ puedeÂ buscarÂ porÂ ocurrenciasÂ deÂ letras
+Â $resultÂ =Â $conn->query($sql);
+Â echoÂ "Â <tableÂ style='width:100%'>
+Â <tr>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Codigo</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Asunto</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Fecha</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Hora</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Lugar</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Cordenadas</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Remitente</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Motivos</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Observaciones</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>FechaÂ Creacion</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>EstadoÂ Reunion</th>
+Â </tr>";
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
+Â while($rowÂ =Â $result->fetch_assoc())Â {
 
- echo "<tr>";
- echo " <td>" . $row["re_codigo"] . "</td>";
- echo " <td>" . $row["re_fecha_re"] . "</td>";
- echo " <td>" . $row['re_tema'] ."</td>";
- echo " <td>" . $row['re_hora'] . "</td>";
- echo " <td>" . $row['re_lugar'] . "</td>";
- echo " <td>" . $row['re_coordenada'] . "</td>";
- echo " <td>" . $row['re_remitente'] . "</td>";
- echo " <td>" . $row['re_motivo'] . "</td>";
- echo " <td>" . $row['re_observacion'] . "</td>";
- echo " <td>" . $row['re_fecha_creacion'] . "</td>";
- echo " <td>" . $row['re_eliminada'] . "</td>";
- echo "</tr>";
- }
- } else {
- echo "<tr>";
- echo " <td colspan='7'> No existen eventos registradas en el sistema </td>";
- echo "</tr>";
- }
- echo "</table>";
- $conn->close();
+Â echoÂ "<tr>";
+Â echoÂ "Â <td>"Â .Â $row["re_codigo"]Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row["re_fecha_re"]Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_tema']Â ."</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_hora']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_lugar']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_coordenada']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_remitente']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_motivo']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_observacion']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_fecha_creacion']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['re_eliminada']Â .Â "</td>";
+Â echoÂ "</tr>";
+Â }
+Â }Â elseÂ {
+Â echoÂ "<tr>";
+Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ eventosÂ registradasÂ enÂ elÂ sistemaÂ </td>";
+Â echoÂ "</tr>";
+Â }
+Â echoÂ "</table>";
+Â $conn->close();
 
 ?>
 
 -Javascript
-function buscarPormotivo() {
-    var cedula = document.getElementById("cedula").value;
+functionÂ buscarPormotivo()Â {
+Â Â Â Â varÂ cedulaÂ =Â document.getElementById("cedula").value;
 
-    if (cedula == "") {
-    document.getElementById("informacion").innerHTML = "";
-    } else {
-    if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+Â Â Â Â ifÂ (cedulaÂ ==Â "")Â {
+Â Â Â Â document.getElementById("informacion").innerHTMLÂ =Â "";
+Â Â Â Â }Â elseÂ {
+Â Â Â Â ifÂ (window.XMLHttpRequest)Â {
+Â Â Â Â //Â codeÂ forÂ IE7+,Â Firefox,Â Chrome,Â Opera,Â Safari
+Â Â Â Â xmlhttpÂ =Â newÂ XMLHttpRequest();
+Â Â Â Â }Â elseÂ {
+Â Â Â Â //Â codeÂ forÂ IE6,Â IE5
+Â Â Â Â xmlhttpÂ =Â newÂ ActiveXObject("Microsoft.XMLHTTP");
+Â Â Â Â }
 
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-    //alert("llegue");
-        document.getElementById("informacion").innerHTML = this.responseText;
-    }
-    };
+Â Â Â Â xmlhttp.onreadystatechangeÂ =Â function()Â {
+Â Â Â Â Â Â Â Â ifÂ (this.readyStateÂ ==Â 4Â &&Â this.statusÂ ==Â 200)Â {
+Â Â Â Â //alert("llegue");
+Â Â Â Â Â Â Â Â document.getElementById("informacion").innerHTMLÂ =Â this.responseText;
+Â Â Â Â }
+Â Â Â Â };
 
-    xmlhttp.open("GET","php/buscar.php?cedula="+cedula,true);
-    xmlhttp.send();
-    }
+Â Â Â Â xmlhttp.open("GET","php/buscar.php?cedula="+cedula,true);
+Â Â Â Â xmlhttp.send();
+Â Â Â Â }
 
-    return false;
+Â Â Â Â returnÂ false;
 }
 
 
@@ -656,195 +659,195 @@ g)	Modificar los datos del usuario.
 -Codigo 
 <?php
 session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
+if(!isset($_SESSION['isLogged'])Â ||Â $_SESSION['isLogged']===FALSE){
+Â Â Â Â header("Location:Â /Practica04/public/vista/login.html");
 }
 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- 
- <link rel="stylesheet" href="css/regla2.css">
- <title>Modificar datos de persona</title>
+Â <metaÂ charset="UTF-8">
+Â 
+Â <linkÂ rel="stylesheet"Â href="css/regla2.css">
+Â <title>ModificarÂ datosÂ deÂ persona</title>
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">User</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">User</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">CerrarÂ Sesion</a>
 </li>
-                <li><a href="" id="">Regresar</a></li>
-                
-              </ul>
-            </nav>
-        </header>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href=""Â id="">Regresar</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
 <br>
 <br>
 <br>
 <br>
 <br>
 
- <?php
- $codigo = $_GET["codigo"];
- $sql = "SELECT * FROM usuario where usu_codigo=$codigo";
- include '../../../config/conexionBD.php';
- $result = $conn->query($sql);
+Â <?php
+Â $codigoÂ =Â $_GET["codigo"];
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ usuarioÂ whereÂ usu_codigo=$codigo";
+Â includeÂ '../../../config/conexionBD.php';
+Â $resultÂ =Â $conn->query($sql);
 
- if ($result->num_rows > 0) {
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
- while($row = $result->fetch_assoc()) {
- ?>
- <form id="formulario01" method="POST" action="../../controladores/usuario/modificar.php">
+Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â ?>
+Â <formÂ id="formulario01"Â method="POST"Â action="../../controladores/usuario/modificar.php">
 
- <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
- <label for="cedula">Cedula :</label>
- <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>"
-required placeholder="Ingrese la cedula ..."/>
- <br>
- <br>
- <label for="nombres">Nombres :</label>
- <input type="text" id="nombres" name="nombres" value="<?php echo $row["usu_nombres"];
-?>" required placeholder="Ingrese los dos nombres ..."/>
- <br>
- <br>
- <label for="apellidos">Apelidos :</label>
- <input type="text" id="apellidos" name="apellidos" value="<?php echo $row["usu_apellidos"];
-?>" required placeholder="Ingrese los dos apellidos ..."/>
- <br>
- <br>
- <label for="direccion">Dirección :</label>
- <input type="text" id="direccion" name="direccion" value="<?php echo $row["usu_direccion"];
-?>" required placeholder="Ingrese la dirección ..."/>
- <br>
- <br>
- <label for="telefono">Teléfono :</label>
- <input type="text" id="telefono" name="telefono" value="<?php echo $row["usu_telefono"];
-?>" required placeholder="Ingrese el teléfono ..."/>
- <br>
- <br>
- <label for="fecha">Fecha Nacimiento :</label>
- <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo
-$row["usu_fecha_nacimiento"]; ?>" required placeholder="Ingrese la fecha de nacimiento ..."/>
- <br>
- <br>
- <label for="correo">Correo electrónico :</label>
- <input type="email" id="correo" name="correo" value="<?php echo $row["usu_correo"]; ?>"
-required placeholder="Ingrese el correo electrónico ..."/>
- <br>
- <br>
- <input type="submit" id="modificar" name="modificar" value="Modificar" />
- <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
- </form>
- <?php
- }
- } else {
- echo "<p>Ha ocurrido un error inesperado !</p>";
- echo "<p>" . mysqli_error($conn) . "</p>";
- }
- $conn->close();
- ?>
+Â <inputÂ type="hidden"Â id="codigo"Â name="codigo"Â value="<?phpÂ echoÂ $codigoÂ ?>"Â />
+Â <labelÂ for="cedula">CedulaÂ :</label>
+Â <inputÂ type="text"Â id="cedula"Â name="cedula"Â value="<?phpÂ echoÂ $row["usu_cedula"];Â ?>"
+requiredÂ placeholder="IngreseÂ laÂ cedulaÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="nombres">NombresÂ :</label>
+Â <inputÂ type="text"Â id="nombres"Â name="nombres"Â value="<?phpÂ echoÂ $row["usu_nombres"];
+?>"Â requiredÂ placeholder="IngreseÂ losÂ dosÂ nombresÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="apellidos">ApelidosÂ :</label>
+Â <inputÂ type="text"Â id="apellidos"Â name="apellidos"Â value="<?phpÂ echoÂ $row["usu_apellidos"];
+?>"Â requiredÂ placeholder="IngreseÂ losÂ dosÂ apellidosÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="direccion">DirecciÃ³nÂ :</label>
+Â <inputÂ type="text"Â id="direccion"Â name="direccion"Â value="<?phpÂ echoÂ $row["usu_direccion"];
+?>"Â requiredÂ placeholder="IngreseÂ laÂ direcciÃ³nÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="telefono">TelÃ©fonoÂ :</label>
+Â <inputÂ type="text"Â id="telefono"Â name="telefono"Â value="<?phpÂ echoÂ $row["usu_telefono"];
+?>"Â requiredÂ placeholder="IngreseÂ elÂ telÃ©fonoÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="fecha">FechaÂ NacimientoÂ :</label>
+Â <inputÂ type="date"Â id="fechaNacimiento"Â name="fechaNacimiento"Â value="<?phpÂ echo
+$row["usu_fecha_nacimiento"];Â ?>"Â requiredÂ placeholder="IngreseÂ laÂ fechaÂ deÂ nacimientoÂ ..."/>
+Â <br>
+Â <br>
+Â <labelÂ for="correo">CorreoÂ electrÃ³nicoÂ :</label>
+Â <inputÂ type="email"Â id="correo"Â name="correo"Â value="<?phpÂ echoÂ $row["usu_correo"];Â ?>"
+requiredÂ placeholder="IngreseÂ elÂ correoÂ electrÃ³nicoÂ ..."/>
+Â <br>
+Â <br>
+Â <inputÂ type="submit"Â id="modificar"Â name="modificar"Â value="Modificar"Â />
+Â <inputÂ type="reset"Â id="cancelar"Â name="cancelar"Â value="Cancelar"Â />
+Â </form>
+Â <?php
+Â }
+Â }Â elseÂ {
+Â echoÂ "<p>HaÂ ocurridoÂ unÂ errorÂ inesperadoÂ !</p>";
+Â echoÂ "<p>"Â .Â mysqli_error($conn)Â .Â "</p>";
+Â }
+Â $conn->close();
+Â ?>
 
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana
- &#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ Salesiana
+Â &#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
 
 
-h)	Cambiar la contraseña del usuario.
+h)	Cambiar la contraseÃ±a del usuario.
 
  
 -Codigo
 <?php
 session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
+if(!isset($_SESSION['isLogged'])Â ||Â $_SESSION['isLogged']===FALSE){
+Â Â Â Â header("Location:Â /Practica04/public/vista/login.html");
 }
 
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Modificar datos de usuarios</title>
- <link rel="stylesheet" href="css/regla2.css">
+Â <metaÂ charset="UTF-8">
+Â <title>ModificarÂ datosÂ deÂ usuarios</title>
+Â <linkÂ rel="stylesheet"Â href="css/regla2.css">
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">User</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">User</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu">
- Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">
-Cerrar Sesion</a></li>
-                <li><a href="" id="">Regresar</a></li>
-                
-              </ul>
-            </nav>
-        </header>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">
+Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">
+CerrarÂ Sesion</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href=""Â id="">Regresar</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
 
- <?php
- $codigo = $_GET["codigo"];
- ?>
- <form id="formulario01" method="POST" action="../../controladores/usuario/cambiar_contrasena.php">
+Â <?php
+Â $codigoÂ =Â $_GET["codigo"];
+Â ?>
+Â <formÂ id="formulario01"Â method="POST"Â action="../../controladores/usuario/cambiar_contrasena.php">
 
- <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
- <label for="cedula">Contraseña Actual :</label>
- <input type="password" id="contrasena1" name="contrasena1" value="" required
-placeholder="Ingrese su contraseña actual ..."/>
- <br>
- <br>
- 
- <label for="cedula">Contraseña Nueva :</label>
- <input type="password" id="contrasena2" name="contrasena2" value="" required
-placeholder="Ingrese su contraseña nueva ..."/>
- <br>
- <br>
- <input type="submit"  class="regresar" id="modificar" name="modificar" value="Modificar" />
- <input type="reset"  class="regresar"  id="cancelar" name="cancelar" value="Cancelar" />
+Â <inputÂ type="hidden"Â id="codigo"Â name="codigo"Â value="<?phpÂ echoÂ $codigoÂ ?>"Â />
+Â <labelÂ for="cedula">ContraseÃ±aÂ ActualÂ :</label>
+Â <inputÂ type="password"Â id="contrasena1"Â name="contrasena1"Â value=""Â required
+placeholder="IngreseÂ suÂ contraseÃ±aÂ actualÂ ..."/>
+Â <br>
+Â <br>
+Â 
+Â <labelÂ for="cedula">ContraseÃ±aÂ NuevaÂ :</label>
+Â <inputÂ type="password"Â id="contrasena2"Â name="contrasena2"Â value=""Â required
+placeholder="IngreseÂ suÂ contraseÃ±aÂ nuevaÂ ..."/>
+Â <br>
+Â <br>
+Â <inputÂ type="submit"Â Â class="regresar"Â id="modificar"Â name="modificar"Â value="Modificar"Â />
+Â <inputÂ type="reset"Â Â class="regresar"Â Â id="cancelar"Â name="cancelar"Â value="Cancelar"Â />
 
- </form>
+Â </form>
 
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana
- &#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ Salesiana
+Â &#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
@@ -855,370 +858,370 @@ i)	No puede recibir ni invitar a reuniones.
 
 
 j)	Visualizar en su pagina principal (index.php) el listado de todas las reuniones existentes, ordenados
-              por los más recientes.
+              por los mÃ¡s recientes.
  
 -Codigo
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Gestión de usuarios</title>
- <link rel="stylesheet" href="css/regla22.css">
+Â <metaÂ charset="UTF-8">
+Â <title>GestiÃ³nÂ deÂ usuarios</title>
+Â <linkÂ rel="stylesheet"Â href="css/regla22.css">
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">Administrador</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">
-Cerrar Sesion</a></li>
-                <li><a href="" id="">Ver Eventos</a></li>
-                <li><a href=" " id="">Mis datos</a></li>
-              </ul>
-            </nav>
-        </header>
-        <br>
-        <br>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">
+CerrarÂ Sesion</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href=""Â id="">VerÂ Eventos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="Â "Â id="">MisÂ datos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
 
-        <table style="width:100% ; background-color:rgba(75, 72, 69, 0.705) ; color:white">
-            <tr>
-                <th>Codigo</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Lugar</th>
-                <th>Cordenadas</th>
-                <th>Remitente</th>
-                <th>Motivos</th>
-                <th>Observaciones</th>
-                <th>Fecha Creacion</th>
-                <th>Estado Evento</th>
-                
-                <th> Eliminar</th>
-                
-            </tr>
-            <?php
-                    include '../../../config/conexionBD.php';
-                    $sql = "SELECT * FROM reunion ; " ;
-                    $result = $conn->query($sql);
-
-
+Â Â Â Â Â Â Â Â <tableÂ style="width:100%Â ;Â background-color:rgba(75,Â 72,Â 69,Â 0.705)Â ;Â color:white">
+Â Â Â Â Â Â Â Â Â Â Â Â <tr>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Codigo</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Asunto</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Fecha</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Hora</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Lugar</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Cordenadas</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Remitente</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Motivos</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Observaciones</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>FechaÂ Creacion</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>EstadoÂ Evento</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <th>Â Eliminar</th>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â </tr>
+Â Â Â Â Â Â Â Â Â Â Â Â <?php
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â includeÂ '../../../config/conexionBD.php';
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunionÂ ;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
 
 
-                    if ($result->num_rows > 0) {
 
-                            $sql = "SELECT * FROM reunion; " ;
-                            $result = $conn->query($sql);
-                            while($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo " <td>" . $row["re_codigo"] . "</td>";
-                                echo " <td>" . $row["re_fecha_re"] . "</td>";
-                                echo " <td>" . $row['re_tema'] ."</td>";
-                                echo " <td>" . $row['re_hora'] . "</td>";
-                                echo " <td>" . $row['re_lugar'] . "</td>";
-                                echo " <td>" . $row['re_coordenada'] . "</td>";
-                                echo " <td>" . $row['re_remitente'] . "</td>";
-                                echo " <td>" . $row['re_motivo'] . "</td>";
-                                echo " <td>" . $row['re_observacion'] . "</td>";
-                                echo " <td>" . $row['re_fecha_creacion'] . "</td>";
-                                echo " <td>" . $row['re_eliminada'] . "</td>";
-                                
-                                echo " <td> <a href='eliminarE.php?codigo=" . $row['re_codigo'] 
-. "'>Eliminar</a> </td>";
-                                echo "</tr>";
-                                
-                            }
 
-                    } else {
-                        echo "<tr>";
-   echo " <td colspan='7'> No existen eventos registradas en el sistema </td>";
-                        echo "</tr>";
-                        }
-                    $conn->close();
-            ?>
-        </table>
- <br>
- <br>
- <br>
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana
- &#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â ifÂ ($result->num_rowsÂ >Â 0)Â {
+
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunion;Â "Â ;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $resultÂ =Â $conn->query($sql);
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_codigo"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row["re_fecha_re"]Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_tema']Â ."</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_hora']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_lugar']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_coordenada']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_remitente']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_motivo']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_observacion']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_fecha_creacion']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>"Â .Â $row['re_eliminada']Â .Â "</td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "Â <td>Â <aÂ href='eliminarE.php?codigo="Â .Â $row['re_codigo']Â 
+.Â "'>Eliminar</a>Â </td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
+
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }Â elseÂ {
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "<tr>";
+Â Â Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ eventosÂ registradasÂ enÂ elÂ sistemaÂ </td>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â echoÂ "</tr>";
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â }
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â $conn->close();
+Â Â Â Â Â Â Â Â Â Â Â Â ?>
+Â Â Â Â Â Â Â Â </table>
+Â <br>
+Â <br>
+Â <br>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ Salesiana
+Â &#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
 
-k)	Eliminar las reuniones de los usuarios con rol “user”.
+k)	Eliminar las reuniones de los usuarios con rol â€œuserâ€.
  
 -Codigo
 
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <link rel="stylesheet" href="css/regla22.css">
- <title>Eliminar datos de persona</title>
+Â <metaÂ charset="UTF-8">
+Â <linkÂ rel="stylesheet"Â href="css/regla22.css">
+Â <title>EliminarÂ datosÂ deÂ persona</title>
 </head>
 <body>
 
-<header id="main-header">
-            
-            <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">Administrador</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">
-Cerrar Sesion</a></li>
-                <li><a href="" id="">Regresar</a></li>
-                
-              </ul>
-            </nav>
-        </header>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">
+CerrarÂ Sesion</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href=""Â id="">Regresar</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
 <br>
- <?php
+Â <?php
 
- $codigo = $_GET["codigo"];
- $sql = "SELECT * FROM reunion where re_codigo=$codigo";
+Â $codigoÂ =Â $_GET["codigo"];
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ reunionÂ whereÂ re_codigo=$codigo";
 
- include '../../../config/conexionBD.php';
- $result = $conn->query($sql);
+Â includeÂ '../../../config/conexionBD.php';
+Â $resultÂ =Â $conn->query($sql);
 
- if ($result->num_rows > 0) {
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
- while($row = $result->fetch_assoc()) {
- ?>
- <form id="formulario01" method="POST" action="../../controladores/administrador/eliminarE.php">
- <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
- <label for="fecha">Fecha (*)</label>
- <input type="date" id="fecha" name="fecha" value="<?php echo $row["re_fecha_re"]; ?>"
+Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â ?>
+Â <formÂ id="formulario01"Â method="POST"Â action="../../controladores/administrador/eliminarE.php">
+Â <inputÂ type="hidden"Â id="codigo"Â name="codigo"Â value="<?phpÂ echoÂ $codigoÂ ?>"Â />
+Â <labelÂ for="fecha">FechaÂ (*)</label>
+Â <inputÂ type="date"Â id="fecha"Â name="fecha"Â value="<?phpÂ echoÂ $row["re_fecha_re"];Â ?>"
 disabled/>
- <br>
- <br>
- <label for="tema">Tema (*)</label>
- <input type="text" id="tema" name="tema" value="<?php echo $row["re_tema"];
-?>" disabled/>
- <br>
- <br>
- <label for="hora">Hora (*)</label>
- <input type="time" id="hora" name="hora" value="<?php echo $row["re_hora"];
-?>" disabled/>
- <br>
- <br>
- <label for="lugar">Lugar (*)</label>
- <input type="text" id="lugar" name="lugar" value="<?php echo $row["re_lugar"];
-?>" disabled/>
- <br>
- <br>
- <label for="cordenada">Cordenada (*)</label>
- <input type="text" id="cordenada" name="cordenada" value="<?php echo $row["re_coordenada"];
-?>" disabled/>
- <br>
- <br>
- <label for="remitente">Remitente (*)</label>
- <input type="text" id="remitente" name="remitente" value="<?php echo
-$row["re_remitente"]; ?>" disabled/>
- <br>
- <br>
- <label for="motivo">Motivo (*)</label>
- <input type="text" id="motivo" name="motivo" value="<?php echo $row["re_motivo"]; ?>"
+Â <br>
+Â <br>
+Â <labelÂ for="tema">TemaÂ (*)</label>
+Â <inputÂ type="text"Â id="tema"Â name="tema"Â value="<?phpÂ echoÂ $row["re_tema"];
+?>"Â disabled/>
+Â <br>
+Â <br>
+Â <labelÂ for="hora">HoraÂ (*)</label>
+Â <inputÂ type="time"Â id="hora"Â name="hora"Â value="<?phpÂ echoÂ $row["re_hora"];
+?>"Â disabled/>
+Â <br>
+Â <br>
+Â <labelÂ for="lugar">LugarÂ (*)</label>
+Â <inputÂ type="text"Â id="lugar"Â name="lugar"Â value="<?phpÂ echoÂ $row["re_lugar"];
+?>"Â disabled/>
+Â <br>
+Â <br>
+Â <labelÂ for="cordenada">CordenadaÂ (*)</label>
+Â <inputÂ type="text"Â id="cordenada"Â name="cordenada"Â value="<?phpÂ echoÂ $row["re_coordenada"];
+?>"Â disabled/>
+Â <br>
+Â <br>
+Â <labelÂ for="remitente">RemitenteÂ (*)</label>
+Â <inputÂ type="text"Â id="remitente"Â name="remitente"Â value="<?phpÂ echo
+$row["re_remitente"];Â ?>"Â disabled/>
+Â <br>
+Â <br>
+Â <labelÂ for="motivo">MotivoÂ (*)</label>
+Â <inputÂ type="text"Â id="motivo"Â name="motivo"Â value="<?phpÂ echoÂ $row["re_motivo"];Â ?>"
 disabled/>
- <br>
- <br>
- <label for="observacion">Observacion (*)</label>
- <input type="text" id="observacion" name="observacion" value="<?php echo 
-$row["re_observacion"]; ?>"
+Â <br>
+Â <br>
+Â <labelÂ for="observacion">ObservacionÂ (*)</label>
+Â <inputÂ type="text"Â id="observacion"Â name="observacion"Â value="<?phpÂ echoÂ 
+$row["re_observacion"];Â ?>"
 disabled/>
- <br>
- <br>
- <br>
- <input type="submit" id="eliminar" name="eliminar" value="Eliminar" />
+Â <br>
+Â <br>
+Â <br>
+Â <inputÂ type="submit"Â id="eliminar"Â name="eliminar"Â value="Eliminar"Â />
 
- <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
- </form>
- <?php
- }
- } else {
- echo "<p>Ha ocurrido un error inesperado !</p>";
- echo "<p>" . mysqli_error($conn) . "</p>";
- }
- $conn->close();
- ?>
+Â <inputÂ type="reset"Â id="cancelar"Â name="cancelar"Â value="Cancelar"Â />
+Â </form>
+Â <?php
+Â }
+Â }Â elseÂ {
+Â echoÂ "<p>HaÂ ocurridoÂ unÂ errorÂ inesperadoÂ !</p>";
+Â echoÂ "<p>"Â .Â mysqli_error($conn)Â .Â "</p>";
+Â }
+Â $conn->close();
+Â ?>
 <br>
 <br>
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana 
-&#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ SalesianaÂ 
+&#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 </body>
 </html>
 
-l)	Eliminar, modificar y cambiar contraseña de los usuarios con rol “user”
+l)	Eliminar, modificar y cambiar contraseÃ±a de los usuarios con rol â€œuserâ€
  
 -Codigo
 
-<!DOCTYPE html>
+<!DOCTYPEÂ html>
 <html>
 <head>
- <meta charset="UTF-8">
- <title>Gestión de usuarios</title>
- <link rel="stylesheet" href="css/regla22.css">
+Â <metaÂ charset="UTF-8">
+Â <title>GestiÃ³nÂ deÂ usuarios</title>
+Â <linkÂ rel="stylesheet"Â href="css/regla22.css">
 </head>
 <body>
 
-<header id="main-header">
-            <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
-           Pruebas de nuevos estilos -->
-            <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+<headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <!--Â Â <aÂ link="index.html"><imgÂ src="img/logo.jpg"Â id="logo"Â alt="Reuniones"/></a>
+Â Â Â Â Â Â Â Â Â Â Â PruebasÂ deÂ nuevosÂ estilosÂ -->
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">Administrador</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
-                <li><a href="../../controladores/usuario/cerrarSesion.php" id="">
-Cerrar Sesion</a></li>
-                <li><a href="eventos.php" id="">Ver Eventos</a></li>
-                <li><a href=" " id="">Mis datos</a></li>
-              </ul>
-            </nav>
-        </header>
-        <br>
-        <br>
-    
-        <br>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="adminW.php"><imgÂ src="img/iconom.png"Â id="iconomenu">Â Home</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="../../controladores/usuario/cerrarSesion.php"Â id="">
+CerrarÂ Sesion</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="eventos.php"Â id="">VerÂ Eventos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="Â "Â id="">MisÂ datos</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â Â Â Â Â <br>
+Â Â Â Â 
+Â Â Â Â Â Â Â Â <br>
 
- <table style="width:100%">
- <tr>
- <th>Cedula</th>
- <th>Nombres</th>
- <th>Apellidos</th>
- <th>Dirección</th>
- <th>Telefono</th>
- <th>Correo</th>
- <th>Fecha Nacimiento</th>
- <th>Eliminar</th>
- <th>Modificar</th>
- <th>Cambiar</th>
- </tr>
- <?php
- include '../../../config/conexionBD.php';
- $sql = "SELECT * FROM usuario where usu_eliminado= 'N'";
- $result = $conn->query($sql);
+Â <tableÂ style="width:100%">
+Â <tr>
+Â <th>Cedula</th>
+Â <th>Nombres</th>
+Â <th>Apellidos</th>
+Â <th>DirecciÃ³n</th>
+Â <th>Telefono</th>
+Â <th>Correo</th>
+Â <th>FechaÂ Nacimiento</th>
+Â <th>Eliminar</th>
+Â <th>Modificar</th>
+Â <th>Cambiar</th>
+Â </tr>
+Â <?php
+Â includeÂ '../../../config/conexionBD.php';
+Â $sqlÂ =Â "SELECTÂ *Â FROMÂ usuarioÂ whereÂ usu_eliminado=Â 'N'";
+Â $resultÂ =Â $conn->query($sql);
 
- if ($result->num_rows > 0) {
+Â ifÂ ($result->num_rowsÂ >Â 0)Â {
 
- while($row = $result->fetch_assoc()) {
- echo "<tr>";
- echo " <td>" . $row["usu_cedula"] . "</td>";
- echo " <td>" . $row['usu_nombres'] ."</td>";
- echo " <td>" . $row['usu_apellidos'] . "</td>";
- echo " <td>" . $row['usu_direccion'] . "</td>";
- echo " <td>" . $row['usu_telefono'] . "</td>";
- echo " <td>" . $row['usu_correo'] . "</td>";
- echo " <td>" . $row['usu_fecha_nacimiento'] . "</td>";
- echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eliminar</a> </td>";
- echo " <td> <a href='modificar.php?codigo=" . $row['usu_codigo'] . "'>Modificar</a> </td>";
- echo " <td> <a href='cambiar_contrasena.php?codigo=" . $row['usu_codigo'] . "'>Cambiar
-contraseña</a> </td>";
+Â while($rowÂ =Â $result->fetch_assoc())Â {
+Â echoÂ "<tr>";
+Â echoÂ "Â <td>"Â .Â $row["usu_cedula"]Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_nombres']Â ."</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_apellidos']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_direccion']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_telefono']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_correo']Â .Â "</td>";
+Â echoÂ "Â <td>"Â .Â $row['usu_fecha_nacimiento']Â .Â "</td>";
+Â echoÂ "Â <td>Â <aÂ href='eliminar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Eliminar</a>Â </td>";
+Â echoÂ "Â <td>Â <aÂ href='modificar.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Modificar</a>Â </td>";
+Â echoÂ "Â <td>Â <aÂ href='cambiar_contrasena.php?codigo="Â .Â $row['usu_codigo']Â .Â "'>Cambiar
+contraseÃ±a</a>Â </td>";
 
- echo "</tr>";
+Â echoÂ "</tr>";
 
- }
- } else {
- echo "<tr>";
- echo " <td colspan='7'> No existen usuarios registradas en el sistema </td>";
- echo "</tr>";
- }
- $conn->close();
- ?>
- </table>
+Â }
+Â }Â elseÂ {
+Â echoÂ "<tr>";
+Â echoÂ "Â <tdÂ colspan='7'>Â NoÂ existenÂ usuariosÂ registradasÂ enÂ elÂ sistemaÂ </td>";
+Â echoÂ "</tr>";
+Â }
+Â $conn->close();
+Â ?>
+Â </table>
 
- <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana 
-&#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
+Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ SalesianaÂ 
+&#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
 
 </body>
 </html>
 
 
- Por último, se debe aplicar parámetros de seguridad a través del uso de sesiones. Para lo
-cuál, se debe tener en cuenta:
+ Por Ãºltimo, se debe aplicar parÃ¡metros de seguridad a travÃ©s del uso de sesiones. Para lo
+cuÃ¡l, se debe tener en cuenta:
 
-m)	Un usuario “anónimo”, es decir, un usuario que no ha iniciado sesión puede 
-acceder únicamente a los archivos de la carpeta pública.
+m)	Un usuario â€œanÃ³nimoâ€, es decir, un usuario que no ha iniciado sesiÃ³n puede 
+acceder Ãºnicamente a los archivos de la carpeta pÃºblica.
  
 -Codigo
-<!doctype html>
-<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<!doctypeÂ html>
+<htmlÂ lang="es"Â xml:lang="es"Â xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-        <link rel="stylesheet" href="css/reglas.css">
-        <link rel="icon" type="image/png"  href="img/icono.png">
-        <meta charset="utf-8">
-        <title>Reuniones</title>
+Â Â Â Â Â Â Â Â <linkÂ rel="stylesheet"Â href="css/reglas.css">
+Â Â Â Â Â Â Â Â <linkÂ rel="icon"Â type="image/png"Â Â href="img/icono.png">
+Â Â Â Â Â Â Â Â <metaÂ charset="utf-8">
+Â Â Â Â Â Â Â Â <title>Reuniones</title>
 </head>
 <body>
-  
-    <header id="main-header">
-            <a id="logo-header" href="#">
-                    <span class="site-name">Edwin Marquez</span>
-                    <span class="site-desc">Universidad Politecnica Salesiana</span>
-                </a> <!-- / #logo-header -->
+Â Â 
+Â Â Â Â <headerÂ id="main-header">
+Â Â Â Â Â Â Â Â Â Â Â Â <aÂ id="logo-header"Â href="#">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-name">EdwinÂ Marquez</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <spanÂ class="site-desc">UniversidadÂ PolitecnicaÂ Salesiana</span>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â </a>Â <!--Â /Â #logo-headerÂ -->
 
-            <nav>
-              <ul>
-            
-                <li><a href="login.html" id="iniciar">Iniciar</a></li>
-              </ul>
-            </nav>
-        </header>
+Â Â Â Â Â Â Â Â Â Â Â Â <nav>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â <ul>
+Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â <li><aÂ href="login.html"Â id="iniciar">Iniciar</a></li>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â </ul>
+Â Â Â Â Â Â Â Â Â Â Â Â </nav>
+Â Â Â Â Â Â Â Â </header>
 
-      <section id="main-content">
-        <article>
-            <header><h1 class="titulopri">&#128221REUNIONES&#128173</h1></header>
-              
-            <img src="img/logo.jpg" id="logo"/>          
+Â Â Â Â Â Â <sectionÂ id="main-content">
+Â Â Â Â Â Â Â Â <article>
+Â Â Â Â Â Â Â Â Â Â Â Â <header><h1Â class="titulopri">&#128221REUNIONES&#128173</h1></header>
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+Â Â Â Â Â Â Â Â Â Â Â Â <imgÂ src="img/logo.jpg"Â id="logo"/>Â Â Â Â Â Â Â Â Â Â 
 
-          </article>
-        </section>
+Â Â Â Â Â Â Â Â Â Â </article>
+Â Â Â Â Â Â Â Â </section>
 
-            <footer id="main-footer">
-                Edwin Fernando Marquez Lozado &nbsp; Universidad Politecnica Salesiana
- &#128274; <a href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a> 
-                &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
-                &#169; Todos los derechos reservados
-            </footer>
-       
+Â Â Â Â Â Â Â Â Â Â Â Â <footerÂ id="main-footer">
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â EdwinÂ FernandoÂ MarquezÂ LozadoÂ &nbsp;Â UniversidadÂ PolitecnicaÂ Salesiana
+Â &#128274;Â <aÂ href="mailto:emarquezl@est.ups.edu.ec">emarquezl@est.ups.edu.ec</a>Â 
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &nbsp;Â <aÂ href="tel:+0983364721">(593)Â 0983364721</a>Â Â <br>Â &nbsp;
+Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â &#169;Â TodosÂ losÂ derechosÂ reservados
+Â Â Â Â Â Â Â Â Â Â Â Â </footer>
+Â Â Â Â Â Â Â 
 </body>
 </html>|
 
  
 
-n)	Un usuario con rol de “admin” puede acceder únicamente a los archivos de la
+n)	Un usuario con rol de â€œadminâ€ puede acceder Ãºnicamente a los archivos de la
 carpeta admin ? vista ? admin y admin ? controladores ? admin
  
 
-o)	Un usuario con rol de “user” puede acceder únicamente a los archivos de la
+o)	Un usuario con rol de â€œuserâ€ puede acceder Ãºnicamente a los archivos de la
 carpeta admin ? vista ? user y admin ? controladores ? user
   
  
