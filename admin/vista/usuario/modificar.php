@@ -21,7 +21,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
             <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
            Pruebas de nuevos estilos -->
             <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
+                    <span class="site-name">User</span>
                     <span class="site-desc">Universidad Politecnica Salesiana</span>
                 </a> <!-- / #logo-header -->
 
