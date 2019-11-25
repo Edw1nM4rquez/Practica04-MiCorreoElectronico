@@ -25,7 +25,7 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 
             <nav>
               <ul>
-                <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
+                <li><a href="cuenta.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="" id="">Regresar</a></li>
                 

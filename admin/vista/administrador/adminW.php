@@ -46,7 +46,7 @@
  </tr>
  <?php
  include '../../../config/conexionBD.php';
- $sql = "SELECT * FROM usuario where usu_eliminado= 'N' and usu_tipo_user ='user'" ;
+ $sql = "SELECT * FROM usuario where usu_eliminado= 'N' and usu_tipo_user ='user'ORDER BY usu_fecha_creacion DESC" ;
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {

@@ -1,27 +1,17 @@
-<?php
-session_start();
-if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
-    header("Location: /Practica04/public/vista/login.html");
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
  <meta charset="UTF-8">
- 
  <link rel="stylesheet" href="css/regla2.css">
- <title>Modificar datos de persona</title>
+ <title>Eliminar datos de persona</title>
 </head>
 <body>
-
 
 <header id="main-header">
             <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
            Pruebas de nuevos estilos -->
             <a id="logo-header" href="#">
-                    <span class="site-name">User</span>
+                    <span class="site-name">Administrador</span>
                     <span class="site-desc">Universidad Politecnica Salesiana</span>
                 </a> <!-- / #logo-header -->
 
@@ -39,10 +29,11 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 <br>
 <br>
 <br>
-
  <?php
+
  $codigo = $_GET["codigo"];
  $sql = "SELECT * FROM usuario where usu_codigo=$codigo";
+
  include '../../../config/conexionBD.php';
  $result = $conn->query($sql);
 
@@ -50,45 +41,44 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
 
  while($row = $result->fetch_assoc()) {
  ?>
- <form id="formulario01" method="POST" action="../../controladores/usuario/modificar.php">
-
+ <form id="formulario01" method="POST" action="../../controladores/administrador/eliminar.php">
  <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
- <label for="cedula">Cedula :</label>
+ <label for="cedula">Cedula (*)</label>
  <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>"
-required placeholder="Ingrese la cedula ..."/>
+disabled/>
  <br>
  <br>
- <label for="nombres">Nombres :</label>
+ <label for="nombres">Nombres (*)</label>
  <input type="text" id="nombres" name="nombres" value="<?php echo $row["usu_nombres"];
-?>" required placeholder="Ingrese los dos nombres ..."/>
+?>" disabled/>
  <br>
  <br>
- <label for="apellidos">Apelidos :</label>
+ <label for="apellidos">Apelidos (*)</label>
  <input type="text" id="apellidos" name="apellidos" value="<?php echo $row["usu_apellidos"];
-?>" required placeholder="Ingrese los dos apellidos ..."/>
+?>" disabled/>
  <br>
  <br>
- <label for="direccion">Dirección :</label>
+ <label for="direccion">Dirección (*)</label>
  <input type="text" id="direccion" name="direccion" value="<?php echo $row["usu_direccion"];
-?>" required placeholder="Ingrese la dirección ..."/>
+?>" disabled/>
  <br>
  <br>
- <label for="telefono">Teléfono :</label>
+ <label for="telefono">Teléfono (*)</label>
  <input type="text" id="telefono" name="telefono" value="<?php echo $row["usu_telefono"];
-?>" required placeholder="Ingrese el teléfono ..."/>
+?>" disabled/>
  <br>
  <br>
- <label for="fecha">Fecha Nacimiento :</label>
+ <label for="fecha">Fecha Nacimiento (*)</label>
  <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo
-$row["usu_fecha_nacimiento"]; ?>" required placeholder="Ingrese la fecha de nacimiento ..."/>
+$row["usu_fecha_nacimiento"]; ?>" disabled/>
  <br>
  <br>
- <label for="correo">Correo electrónico :</label>
+ <label for="correo">Correo electrónico (*)</label>
  <input type="email" id="correo" name="correo" value="<?php echo $row["usu_correo"]; ?>"
-required placeholder="Ingrese el correo electrónico ..."/>
+disabled/>
  <br>
  <br>
- <input type="submit" id="modificar" name="modificar" value="Modificar" />
+ <input type="submit" id="eliminar" name="eliminar" value="Eliminar" />
  <input type="reset" id="cancelar" name="cancelar" value="Cancelar" />
  </form>
  <?php
@@ -100,7 +90,8 @@ required placeholder="Ingrese el correo electrónico ..."/>
  $conn->close();
  ?>
 
- 
+
+
 <br>
 <br>
 <br>
@@ -116,6 +107,5 @@ required placeholder="Ingrese el correo electrónico ..."/>
                 &nbsp; <a href="tel:+0983364721">(593) 0983364721</a>  <br> &nbsp;
                 &#169; Todos los derechos reservados
             </footer>
-
 </body>
 </html>

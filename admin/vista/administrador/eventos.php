@@ -59,7 +59,7 @@
 
                     if ($result->num_rows > 0) {
 
-                            $sql = "SELECT * FROM reunion; " ;
+                            $sql = "SELECT * FROM reunion ORDER BY re_fecha_creacion DESC; " ;
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
                                 echo "<tr>";

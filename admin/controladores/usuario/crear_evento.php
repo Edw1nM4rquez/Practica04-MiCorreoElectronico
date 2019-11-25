@@ -27,7 +27,7 @@
  $observaciones = isset($_POST["observaciones"]) ? trim($_POST["observaciones"]) : null;
 
  $sql = "INSERT INTO reunion VALUES (0, '$fecha', '$asunto', '$hora', '$lugar', '$coordenadas',
-'$remitente',  '$motivos', '$observaciones', null)";
+'$remitente',  '$motivos', '$observaciones', null,'N')";
 
  if ($conn->query($sql) === TRUE) {
     header("Location: ../../vista/usuario/cuenta.php");
