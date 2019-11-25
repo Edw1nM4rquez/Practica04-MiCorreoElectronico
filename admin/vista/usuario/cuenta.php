@@ -34,7 +34,6 @@ if(!isset($_SESSION['isLogged']) || $_SESSION['isLogged']===FALSE){
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="crear_reuniones.php" id="">Crear Evento</a></li>
                 <li><a href="seguridad.php" id="">Mis datos</a></li>
-                <li><a href="" id="">Cambiar contraseña</a></li>
               </ul>
             </nav>
         </header>

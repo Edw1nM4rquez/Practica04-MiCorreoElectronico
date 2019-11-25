@@ -12,7 +12,7 @@
             <!--  <a link="index.html"><img src="img/logo.jpg" id="logo" alt="Reuniones"/></a>
            Pruebas de nuevos estilos -->
             <a id="logo-header" href="#">
-                    <span class="site-name">Administrador</span>
+                    <span class="site-name">User</span>
                     <span class="site-desc">Universidad Politecnica Salesiana</span>
                 </a> <!-- / #logo-header -->
 
@@ -42,6 +42,8 @@
  <th>Fecha Nacimiento</th>
  <th>Modificar</th>
  <th>Cambiar</th>
+ <th>Eliminar</th>
+
  </tr>
  <?php
 
@@ -69,7 +71,7 @@ include '../../../config/conexionBD.php';
  echo " <td> <a href='modificar.php?codigo=" . $row['usu_codigo'] . "'>Modificar</a> </td>";
  echo " <td> <a href='cambiar_contrasena.php?codigo=" . $row['usu_codigo'] . "'>Cambiar
 contraseña</a> </td>";
-
+echo " <td> <a href='eliminar.php?codigo=" . $row['usu_codigo'] . "'>Eliminar</a> </td>";
  echo "</tr>";
 
  }
