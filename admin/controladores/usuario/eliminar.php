@@ -17,7 +17,7 @@
  $sql = "UPDATE usuario SET usu_eliminado = 'S', usu_fecha_modificacion = '$fecha' WHERE
 usu_codigo = $codigo";
  if ($conn->query($sql) === TRUE) {
-    header("Location: ../../vista/usuario/cuenta.php");
+   header("Location: ../../vista/usuario/Misdatos.php");
  } else {
  echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
  }

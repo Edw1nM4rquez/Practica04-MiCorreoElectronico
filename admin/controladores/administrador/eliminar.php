@@ -18,10 +18,11 @@
 usu_codigo = $codigo";
  if ($conn->query($sql) === TRUE) {
  echo "<p>Se ha eliminado los datos correctamemte!!!</p>";
+ header("Location: ../../vista/administrador/adminW.php");
  } else {
  echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
  }
- echo "<a href='../../vista/usuario/index.php'>Regresar</a>";
+ /*echo "<a href='../../vista/usuario/index.php'>Regresar</a>";*/
  $conn->close();
 
 ?>

@@ -19,7 +19,7 @@
               <ul>
                 <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
-                <li><a href="" id="">Regresar</a></li>
+                <li><a href="adminW.php" id="">Regresar</a></li>
                 
               </ul>
             </nav>
@@ -41,7 +41,7 @@
 
  while($row = $result->fetch_assoc()) {
  ?>
- <form id="formulario01" method="POST" action="../../controladores/usuario/eliminar.php">
+ <form id="formulario01" method="POST" action="../../controladores/administrador/eliminar.php">
  <input type="hidden" id="codigo" name="codigo" value="<?php echo $codigo ?>" />
  <label for="cedula">Cedula (*)</label>
  <input type="text" id="cedula" name="cedula" value="<?php echo $row["usu_cedula"]; ?>"

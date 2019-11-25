@@ -20,7 +20,6 @@
                 <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
                 <li><a href="eventos.php" id="">Ver Eventos</a></li>
-                <li><a href=" " id="">Mis datos</a></li>
               </ul>
             </nav>
         </header>
@@ -46,7 +45,7 @@
  </tr>
  <?php
  include '../../../config/conexionBD.php';
- $sql = "SELECT * FROM usuario where usu_eliminado= 'N' and usu_tipo_user ='user'ORDER BY usu_fecha_creacion DESC" ;
+ $sql = "SELECT * FROM usuario where usu_eliminado= 'N' and usu_tipo_user ='user' and usu_eliminado='N' ORDER BY usu_fecha_creacion DESC" ;
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {

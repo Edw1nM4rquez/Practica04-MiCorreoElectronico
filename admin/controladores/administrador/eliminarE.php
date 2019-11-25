@@ -18,10 +18,11 @@
 re_codigo = $codigo";
  if ($conn->query($sql) === TRUE) {
  echo "<p>Se ha eliminado los datos correctamemte!!!</p>";
+ header("Location: ../../vista/administrador/eventos.php");
  } else {
  echo "<p>Error: " . $sql . "<br>" . mysqli_error($conn) . "</p>";
  }
- echo "<a href='../../vista/administrador/adminW.php'>Regresar</a>";
+ /*echo "<a href='../../vista/administrador/adminW.php'>Regresar</a>";*/
  $conn->close();
 
 ?>

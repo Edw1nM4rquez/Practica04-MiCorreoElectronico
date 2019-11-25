@@ -28,6 +28,7 @@ usu_password=MD5('$contrasena1')";
  "WHERE usu_codigo = $codigo";
  if ($conn->query($sqlContrasena2) === TRUE) {
  echo "Se ha actualizado la contraseña correctamemte!!!<br>";
+ header("Location: ../../vista/administrador/adminW.php");
  } else {
  echo "<p>Error: " . mysqli_error($conn) . "</p>";
  }
@@ -35,7 +36,7 @@ usu_password=MD5('$contrasena1')";
  }else{
  echo "<p>La contraseña actual no coincide con nuestros registros!!! </p>";
  }
- echo "<a href='../../vista/usuario/index.php'>Regresar</a>";
+ /*echo "<a href='../../vista/usuario/index.php'>Regresar</a>";*/
  $conn->close();
  
 ?>

@@ -19,7 +19,7 @@
               <ul>
                 <li><a href="adminW.php"><img src="img/iconom.png" id="iconomenu"> Home</a></li>
                 <li><a href="../../controladores/usuario/cerrarSesion.php" id="">Cerrar Sesion</a></li>
-                <li><a href="" id="">Regresar</a></li>
+                <li><a href="adminW.php" id="">Regresar</a></li>
                 
               </ul>
             </nav>

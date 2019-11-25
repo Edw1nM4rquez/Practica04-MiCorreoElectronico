@@ -30,10 +30,11 @@
  "WHERE usu_codigo = $codigo";
  if ($conn->query($sql) === TRUE) {
  echo "Se ha actualizado los datos personales correctamemte!!!<br>";
+ header("Location: ../../vista/usuario/Misdatos.php");
  } else {
  echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
  }
- echo "<a href='../../vista/usuario/cuenta.php'>Regresar</a>";
+ /*echo "<a href='../../vista/usuario/cuenta.php'>Regresar</a>";*/
  $conn->close();
 
 ?>
